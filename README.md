@@ -15,17 +15,7 @@ The system monitors environmental conditions using multiple IoT sensor nodes and
 - Alert notification
   
 ## System Architecture
-STM32
-↓
-ESP8266
-↓
-WiFi
-↓
-Backend Server
-↓
-Database
-↓
-Dashboard
+STM32 -> ESP8266 -> WiFi -> Backend Server -> Database -> Dashboard
 
 ## Technology
 Firmware
@@ -43,17 +33,17 @@ Communication
 - MQTT
 
 ## Team
-Kien: Project Lead, Backend, Frontend
-Nghia: STM32 Firmware 
-Khanh: ESP8266 Communication
-Nhan: System Integration 
+- Kien: Project Lead, Backend, Frontend
+- Nghia: STM32 Firmware 
+- Khanh: ESP8266 Communication
+- Nhan: System Integration 
 
 ## Development Methodology
 Agile Scrum
 
-Sprint 1: System Design
-Sprint 2: Implementation
-Sprint 3: Testing & Deployment
+- Sprint 1: System Design
+- Sprint 2: Implementation
+- Sprint 3: Testing & Deployment
 
 ## License
 MIT License
