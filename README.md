@@ -18,19 +18,11 @@ The system monitors environmental conditions using multiple IoT sensor nodes and
 STM32 -> ESP8266 -> WiFi -> Backend Server -> Database -> Dashboard
 
 ## Technology
-Firmware
-- STM32
-- ESP8266
-Backend
-- NodeJS
-Frontend
-- React
-Database
-- MySQL
-Communication
-- UART
-- HTTP
-- MQTT
+- Firmware: STM32, ESP8266
+- Backend: NodeJS
+- Frontend: React
+- Database: MySQL
+- Communication: UART, HTTP, MQTT
 
 ## Team
 - Kien: Project Lead, Backend, Frontend
