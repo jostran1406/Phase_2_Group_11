@@ -1,0 +1,40 @@
+site_name: IoT Laboratory Monitoring System
+site_description: Documentation for IoT Laboratory Environment Monitoring and Control System
+
+theme:
+  name: material
+
+nav:
+  - Home: index.md
+
+  - Architecture:
+      - System Architecture: architecture/system.md
+      - STM32 Architecture: architecture/stm.md
+      - ESP8266 Architecture: architecture/esp.md
+      - Backend Architecture: architecture/backend.md
+      - Frontend Architecture: architecture/frontend.md
+
+  - API:
+      - API Overview: api/index.md
+      - STM32 API: api/stm_api.md
+      - ESP8266 API: api/esp_api.md
+      - Backend API: api/backend_api.md
+
+  - User Guide:
+      - User Guide: user-guide/user-guide.md
+      - Installation Guide: user-guide/installation.md
+
+  - Testing:
+      - Test Plan: test/test-plan.md
+      - Test Report: test/test-report.md
+
+  - Deployment:
+      - Deployment Guide: deployment/deployment.md
+
+  - Reports:
+      - SRS: report/srs.md
+      - SoW: report/sow.md
+      - Project Report: report/project-report.md
+
+  - Doxygen API:
+      - API Reference: doxygen/index.html
