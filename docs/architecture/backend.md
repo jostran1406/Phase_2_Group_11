@@ -116,6 +116,27 @@ FLOAT light_threshold
 }
 ```
 
+## 5.1 Database Relationships
+
+```mermaid
+erDiagram
+
+USER ||--o{ ALERT : receives
+
+SETTING ||--o{ ALERT : triggers
+
+DEVICE ||--o{ ALERT : generates
+
+DEVICE ||--o{ SENSOR_DATA : produces
+```
+
+### Relationship Description
+
+- Each Device generates multiple Sensor Data records.
+- Devices may generate alert events when monitored values exceed configured thresholds.
+- System Settings define threshold values used to trigger alerts.
+- Users receive and monitor alert notifications through the dashboard.
+
 ## 6. Data Storage Flow
 ```mermaid
 flowchart LR
@@ -126,6 +147,16 @@ Validation --> MySQL
 MySQL --> REST_API
 REST_API --> Frontend
 ```
+
+## 6.1 Data Storage Strategy
+
+Sensor data collected from STM32 nodes is transmitted through ESP8266 to the backend server. The backend validates incoming data before storing it in the MySQL database.
+
+Environmental data including temperature, humidity, and light intensity is recorded periodically to support real-time monitoring and historical analysis.
+
+Alert events are stored separately to maintain a complete event history and support notification services. Device status changes are also logged to assist system monitoring and troubleshooting.
+
+The storage design ensures data consistency, scalability, and efficient retrieval for dashboard visualization and reporting.
 
 ## 7. REST API Flow
 ```mermaid

@@ -72,7 +72,49 @@ Setting --> Dashboard
 
 ```
 
-## 6. Sensor Data Visualization
+## 6. Dashboard Wireframe
+```mermaid
+flowchart TB
+
+Navbar[Navigation Bar]
+
+Sidebar[Sidebar Menu]
+
+Dashboard[Dashboard Page]
+
+Temp[Temperature Card]
+
+Hum[Humidity Card]
+
+Light[Light Intensity Card]
+
+Chart[Real-time Chart]
+
+Control[Device Control Panel]
+
+Alert[Alert Notification Panel]
+
+Navbar --> Dashboard
+
+Sidebar --> Dashboard
+
+Dashboard --> Temp
+
+Dashboard --> Hum
+
+Dashboard --> Light
+
+Dashboard --> Chart
+
+Dashboard --> Control
+
+Dashboard --> Alert
+```
+### Wireframe Description
+
+The dashboard provides a centralized interface for monitoring laboratory conditions. Sensor cards display real-time environmental data, while charts visualize historical trends. Users can control connected devices and view system alerts from a single dashboard page.
+
+## 7. Sensor Data Visualization
 ```mermaid
 flowchart TB
 
