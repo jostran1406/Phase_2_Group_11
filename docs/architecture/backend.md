@@ -1,6 +1,11 @@
 # Backend Architecture
 
 ## 1. Overview
+The Backend is responsible for receiving, processing, storing, and providing environmental monitoring data collected from IoT devices deployed in the laboratory. It acts as the central communication layer between the embedded system (STM32 and ESP8266), the database, and the web-based dashboard.
+
+The backend system receives sensor data including temperature, humidity, and light intensity from ESP8266 through network communication protocols. After validating and processing the received data, the system stores it in a MySQL database and provides REST APIs for the frontend dashboard to retrieve real-time and historical information.
+
+In addition, the backend manages alert generation, device status monitoring, threshold configuration, and data access services to support automatic control and user interaction. The architecture is designed to be scalable, maintainable, and suitable for future expansion of additional sensors and monitoring nodes.
 
 ## 2. Backend Architecture
 ```mermaid
@@ -37,15 +42,16 @@ Model --> MySQL
 ```
 
 ## 4. Database Selection
-Database
+### Database
 MySQL
-Reason
+
+### Reasons
 - Open Source
 - Stable
-- Relational
-- Suitable for IoT
-- Easy Backup
-- Good NodeJS Support
+- Relational Database
+- Suitable for IoT Applications
+- Easy Backup and Recovery
+- Good NodeJS Integration
 
 ## 5. Database Schema
 ```mermaid
@@ -112,35 +118,13 @@ FLOAT light_threshold
 
 ## 6. Data Storage Flow
 ```mermaid
-
 flowchart LR
-
-STM32
-
--->
-
-ESP8266
-
--->
-
-Backend
-
--->
-
-Validation
-
--->
-
-MySQL
-
--->
-
-REST API
-
--->
-
-Frontend
-
+STM32 --> ESP8266
+ESP8266 --> Backend
+Backend --> Validation
+Validation --> MySQL
+MySQL --> REST_API
+REST_API --> Frontend
 ```
 
 ## 7. REST API Flow
