@@ -9,8 +9,8 @@ nav:
 
   - Architecture:
       - System Architecture: architecture/system.md
-      - STM32 Architecture: architecture/stm.md
-      - ESP8266 Architecture: architecture/esp.md
+      - STM32 Architecture: architecture/stm32.md
+      - ESP8266 Architecture: architecture/esp8266.md
       - Backend Architecture: architecture/backend.md
       - Frontend Architecture: architecture/frontend.md
 
