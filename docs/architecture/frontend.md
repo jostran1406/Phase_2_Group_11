@@ -149,3 +149,32 @@ F --> G
 G --> H
 
 ```
+
+## 8. API Integration
+
+The frontend communicates with the backend through REST APIs. All requests and responses use JSON format.
+
+### API Usage
+
+| Function | Endpoint | Method |
+|-----------|-----------|---------|
+| User Login | /api/login | POST |
+| Get Latest Sensor Data | /api/sensor/latest | GET |
+| Get Sensor History | /api/sensor/history | GET |
+| Device Control | /api/device/control | POST |
+| Get Alert History | /api/alerts | GET |
+| Update Threshold Setting | /api/settings | POST |
+
+### Communication Flow
+
+```mermaid
+sequenceDiagram
+
+User->>Frontend: Request Data
+
+Frontend->>Backend: REST API Request
+
+Backend-->>Frontend: JSON Response
+
+Frontend-->>User: Display Data
+```

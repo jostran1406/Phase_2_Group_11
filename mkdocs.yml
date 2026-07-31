@@ -24,7 +24,7 @@ nav:
       - Frontend Architecture: architecture/frontend.md
 
   - API:
-      - API Overview: api/index.md
+      - API Overview: api/api-overview.md
       - STM32 API: api/stm_api.md
       - ESP8266 API: api/esp_api.md
       - Backend API: api/backend_api.md
