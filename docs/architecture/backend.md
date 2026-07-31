@@ -262,3 +262,21 @@ Backend -- REST API --> STM32
 
 STM32 -- GPIO --> Relay
 ```
+
+## Data Storage Strategy
+
+The backend stores all sensor measurements in a MySQL database.
+
+Sensor data includes:
+
+- Temperature
+- Humidity
+- Light Intensity
+- Timestamp
+
+Each ESP8266 node periodically sends data to the backend using HTTP or MQTT.
+
+The backend validates incoming data before inserting records into the SENSOR_DATA table.
+
+Alert events and device status changes are stored separately to support monitoring, reporting, and system diagnostics.
+
