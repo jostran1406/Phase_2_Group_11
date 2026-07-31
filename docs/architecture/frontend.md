@@ -1,7 +1,7 @@
 # Frontend Architecture
 
 ## 1. Overview
-The Frontend is a web-based monitoring dashboard developed for the IoT Laboratory Monitoring System. It allows users to monitor environmental conditions within the laboratory through data collected from three IoT monitoring nodes deployed in different areas.
+The Frontend is a web-based monitoring dashboard developed for the IoT Laboratory Monitoring System. The dashboard provides real-time visualization of temperature, humidity and light intensity data collected by ESP8266-based monitoring nodes deployed throughout the laboratory.
 
 The dashboard provides real-time visualization of temperature, humidity, and light intensity measurements, as well as device status information and alert notifications. Users can also review historical data, monitor system health, and configure operational thresholds for automatic control functions.
 

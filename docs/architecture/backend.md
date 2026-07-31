@@ -1,7 +1,7 @@
 # Backend Architecture
 
 ## 1. Overview
-The Backend is responsible for receiving, processing, storing, and providing environmental monitoring data collected from IoT devices deployed in the laboratory. It acts as the central communication layer between the embedded system (STM32 and ESP8266), the database, and the web-based dashboard.
+The Backend is responsible for receiving, processing, storing, and providing environmental monitoring data collected from IoT devices deployed in the laboratory. It acts as the central communication layer between ESP8266 monitoring nodes, STM32 control nodes, the database, and the web-based dashboard.
 
 The backend system receives sensor data including temperature, humidity, and light intensity from ESP8266 through network communication protocols. After validating and processing the received data, the system stores it in a MySQL database and provides REST APIs for the frontend dashboard to retrieve real-time and historical information.
 
@@ -140,7 +140,7 @@ DEVICE ||--o{ SENSOR_DATA : produces
 ## 6. Data Storage Flow
 ```mermaid
 flowchart LR
-STM32 --> ESP8266
+Sensors --> ESP8266
 ESP8266 --> Backend
 Backend --> Validation
 Validation --> MySQL
@@ -150,7 +150,7 @@ REST_API --> Frontend
 
 ## 6.1 Data Storage Strategy
 
-Sensor data collected from STM32 nodes is transmitted through ESP8266 to the backend server. The backend validates incoming data before storing it in the MySQL database.
+Sensor data collected from ESP8266 monitoring nodes is transmitted directly to the backend server through MQTT/HTTP communication. The backend validates incoming data before storing it in the MySQL database.
 
 Environmental data including temperature, humidity, and light intensity is recorded periodically to support real-time monitoring and historical analysis.
 
@@ -186,13 +186,17 @@ Sensor
 
 -->
 
-STM32
-
--->
-
 ESP8266
 
 -->
+
+Backend
+
+Backend
+
+-->
+
+STM32
 
 Backend
 
@@ -240,43 +244,21 @@ Buzzer
 
 ## 9. Communication Protocol
 ```mermaid
-
 graph LR
 
-Sensor
+Sensor -- GPIO/I2C --> ESP8266
 
--- GPIO/I2C -->
+User -- HTTPS --> Frontend
 
-STM32
+Frontend -- REST API --> Backend
 
-STM32
+ESP8266 -- MQTT/HTTP --> Backend
 
--- UART -->
+Backend -- MQTT/HTTP --> ESP8266
 
-ESP8266
+Backend -- SQL --> MySQL
 
-ESP8266
+Backend -- REST API --> STM32
 
--- MQTT -->
-
-Backend
-
-Backend
-
--- SQL -->
-
-MySQL
-
-Frontend
-
--- REST API -->
-
-Backend
-
-User
-
--- HTTPS -->
-
-Frontend
-
+STM32 -- GPIO --> Relay
 ```
