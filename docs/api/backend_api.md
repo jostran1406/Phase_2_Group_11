@@ -1,10 +1,18 @@
 # Backend API
 
-## POST /login
+## 1. Overview
+
+The Backend API provides communication between the Frontend Dashboard, ESP8266 monitoring nodes, and the backend server. All APIs use REST architecture and JSON data format.
+
+---
+
+## 2. Authentication API
+
+### POST /api/login
 
 User authentication.
 
-### Request
+#### Request
 
 ```json
 {
@@ -13,7 +21,7 @@ User authentication.
 }
 ```
 
-### Response
+#### Response
 
 ```json
 {
@@ -22,11 +30,15 @@ User authentication.
 }
 ```
 
-## GET /sensor/latest
+---
 
-Return latest environmental data.
+## 3. Latest Sensor Data API
 
-### Response
+### GET /api/sensor/latest
+
+Returns the most recent sensor data.
+
+#### Response
 
 ```json
 {
@@ -37,9 +49,15 @@ Return latest environmental data.
 }
 ```
 
-## GET /sensor/history
+---
 
-### Response
+## 4. Sensor History API
+
+### GET /api/sensor/history
+
+Returns historical sensor records.
+
+#### Response
 
 ```json
 [
@@ -52,9 +70,15 @@ Return latest environmental data.
 ]
 ```
 
-## POST /device/control
+---
 
-### Request
+## 5. Device Control API
+
+### POST /api/device/control
+
+Control laboratory devices.
+
+#### Request
 
 ```json
 {
@@ -63,7 +87,7 @@ Return latest environmental data.
 }
 ```
 
-### Response
+#### Response
 
 ```json
 {
@@ -71,9 +95,15 @@ Return latest environmental data.
 }
 ```
 
-## GET /alerts
+---
 
-### Response
+## 6. Alert API
+
+### GET /api/alerts
+
+Returns alert history.
+
+#### Response
 
 ```json
 [
@@ -85,9 +115,15 @@ Return latest environmental data.
 ]
 ```
 
-## POST /settings
+---
 
-### Request
+## 7. Setting API
+
+### POST /api/settings
+
+Update threshold configuration.
+
+#### Request
 
 ```json
 {
@@ -97,7 +133,7 @@ Return latest environmental data.
 }
 ```
 
-### Response
+#### Response
 
 ```json
 {
@@ -105,11 +141,15 @@ Return latest environmental data.
 }
 ```
 
-## ESP8266 Sensor Data Upload
+---
 
-### POST /sensor/upload
+## 8. ESP8266 Sensor Upload API
 
-### Request
+### POST /api/sensor/upload
+
+Used by ESP8266 monitoring nodes to upload environmental data.
+
+#### Request
 
 ```json
 {
@@ -121,10 +161,11 @@ Return latest environmental data.
 }
 ```
 
-### Response
+#### Response
 
 ```json
 {
-  "status": "success"
+  "status": "success",
+  "message": "Data received"
 }
 ```

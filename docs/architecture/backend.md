@@ -150,13 +150,15 @@ REST_API --> Frontend
 
 ## 6.1 Data Storage Strategy
 
-Sensor data collected from ESP8266 monitoring nodes is transmitted directly to the backend server through MQTT/HTTP communication. The backend validates incoming data before storing it in the MySQL database.
+Sensor data is collected by ESP8266 monitoring nodes and transmitted directly to the backend server using HTTP or MQTT protocols.
 
-Environmental data including temperature, humidity, and light intensity is recorded periodically to support real-time monitoring and historical analysis.
+The backend validates all incoming data before storing it in the MySQL database. Environmental parameters including temperature, humidity, and light intensity are periodically recorded in the SENSOR_DATA table for real-time monitoring and historical analysis.
 
-Alert events are stored separately to maintain a complete event history and support notification services. Device status changes are also logged to assist system monitoring and troubleshooting.
+Device status information is stored in the DEVICE table to support remote monitoring and control operations.
 
-The storage design ensures data consistency, scalability, and efficient retrieval for dashboard visualization and reporting.
+Threshold configurations are stored in the SETTING table and are used by the backend to evaluate environmental conditions. When sensor values exceed predefined thresholds, the system automatically generates alert records and stores them in the ALERT table.
+
+This storage strategy ensures data consistency, efficient retrieval, scalability, and long-term historical data management for dashboard visualization and reporting.
 
 ## 7. REST API Flow
 ```mermaid
