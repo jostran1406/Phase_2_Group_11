@@ -4,7 +4,7 @@
 
 The IoT Laboratory Monitoring and Control System is designed to provide real-time environmental monitoring and remote device control for laboratory environments. The system integrates embedded hardware, wireless communication, backend services, database storage, and a web-based dashboard into a unified architecture.
 
-The architecture follows a layered design to improve modularity, maintainability, and scalability. Each layer has clearly defined responsibilities and communicates through standardized interfaces.
+The architecture follows a layered design to improve modularity, maintainability, and scalability. Environmental monitoring and device control are separated into independent modules. The ESP8266 acts as the Monitoring Node responsible for collecting sensor data, while the STM32 serves as the Control Node responsible for operating laboratory equipment.
 
 ---
 
@@ -31,11 +31,11 @@ The following diagram illustrates the overall architecture of the IoT Laboratory
 
 #### User Layer
 
-Provides the interface for users to monitor environmental conditions and control laboratory devices through a web dashboard.
+Provides the interface for users to monitor environmental conditions and remotely control laboratory devices through the web-based dashboard.
 
 #### Application Layer
 
-Processes user requests, stores sensor data, provides REST APIs, and manages business logic.
+Processes sensor data, stores environmental information, provides REST APIs for the frontend, and generates control commands based on user requests or business logic.
 
 Components include:
 
@@ -45,28 +45,32 @@ Components include:
 
 #### Communication Layer
 
-Acts as a gateway between the embedded devices and the application server.
+Provides wireless communication between the monitoring node and the backend server.
 
 Component:
 
-- ESP8266 Gateway
+- ESP8266 Monitoring Node
 
 Communication protocols:
 
-- UART
-- HTTP
 - MQTT
+- HTTP
+- WiFi
 
 #### Embedded Layer
 
-Responsible for sensor acquisition and device control.
+Responsible for environmental monitoring and physical device control.
 
-Components include:
+Monitoring Components:
 
-- STM32 Controller
 - Temperature Sensor
 - Humidity Sensor
 - Light Sensor
+- ESP8266 Monitoring Node
+
+Control Components:
+
+- STM32 Control Node
 - Relay Module
 - Fan
 - Light
@@ -87,8 +91,8 @@ The communication diagram below illustrates the communication interfaces between
 | User ↔ Frontend | HTTPS | User interaction |
 | Frontend ↔ Backend | REST API | Request and response |
 | Backend ↔ Database | SQL | Data storage |
-| Backend ↔ ESP8266 | HTTP / MQTT | Data transmission |
-| ESP8266 ↔ STM32 | UART | Serial communication |
+| ESP8266 ↔ Backend | MQTT / HTTP | Sensor data transmission |
+| Backend ↔ STM32 | Control Command | Device control |
 | STM32 ↔ Relay | GPIO | Device control |
 
 ---
@@ -101,21 +105,21 @@ The following diagram illustrates how sensor data and control commands flow thro
 
 ### Sensor Data Flow
 
-1. STM32 acquires sensor data using the sensor interfaces (BMP280, BH1750, and MQ135).
-2. STM32 packages the collected data into a communication payload.
-3. ESP8266 receives the payload via UART and converts it into an MQTT/HTTP message.
-4. The Backend Server receives the sensor data and stores it in the MySQL Database.
-5. The Frontend Dashboard retrieves the latest sensor data through REST APIs.
-6. Users monitor environmental conditions in real time via the web interface.
+1. Environmental sensors (Temperature, Humidity, and Light) are connected directly to the ESP8266 Monitoring Node.
+2. ESP8266 periodically acquires sensor values and constructs a sensor data payload.
+3. ESP8266 publishes the collected sensor data to the Backend Server using MQTT or HTTP.
+4. The Backend validates the received data before storing it in the MySQL Database.
+5. The Frontend Dashboard retrieves the latest environmental information through REST APIs.
+6. Users monitor laboratory conditions in real time via the web interface.
 
 ### Control Command Flow
 
-1. User sends a control request.
-2. Frontend forwards the request to Backend.
-3. Backend sends the command to ESP8266.
-4. ESP8266 forwards the command to STM32.
-5. STM32 controls the Relay Module.
-6. Relay switches laboratory devices on or off.
+1. The user submits a device control request from the Frontend Dashboard.
+2. The Frontend forwards the request to the Backend Server through REST APIs.
+3. The Backend processes the request and generates the corresponding control command.
+4. The Backend sends the control command to the STM32 Control Node.
+5. STM32 parses the received command and updates the GPIO outputs.
+6. The Relay Module switches laboratory devices such as the Fan, Light, or Buzzer on or off.
 
 ---
 
@@ -129,19 +133,20 @@ The following sequence diagram illustrates the interaction between system compon
 
 The primary software operations illustrated in the sequence diagram include:
 
-- Sensor acquisition
-- Payload construction
-- UART communication
+- Sensor acquisition by ESP8266
+- Sensor payload construction
 - MQTT/HTTP data publishing
+- Sensor data validation
 - Database insertion
 - REST API request handling
-- Device control command processing
+- Control command generation
+- Command parsing in STM32
 - Relay control
-- Device status reporting
+- Device status update
 
-These operations represent the interaction between the STM32 Controller, ESP8266 Gateway, Backend Server, Database, and Frontend Dashboard during both monitoring and control processes.
+The monitoring process begins with the ESP8266 Monitoring Node periodically collecting environmental data from the connected sensors. The collected data is packaged and transmitted to the Backend Server through MQTT or HTTP. The Backend validates the incoming data, stores it in the MySQL database, and provides the latest information to the Frontend Dashboard through REST APIs.
 
-The sequence begins with sensor data acquisition, followed by wireless data transmission to the backend server, database storage, dashboard visualization, user control requests, and finally hardware actuation through the STM32 controller.
+When a user issues a control request from the Dashboard, the Backend processes the request and generates a control command. The STM32 Control Node receives the command, parses it, and controls the corresponding GPIO outputs. These GPIO signals drive the Relay Module, which activates or deactivates laboratory devices such as the Fan, Light, and Buzzer. Finally, the updated device status is returned to the Backend and displayed on the Dashboard.
 
 ---
 
@@ -150,7 +155,8 @@ The sequence begins with sensor data acquisition, followed by wireless data tran
 The architecture provides the following advantages:
 
 - Layered architecture for better modularity
-- Loose coupling between hardware and software
+- Loose coupling between monitoring and control modules
+- Separation between monitoring nodes (ESP8266) and control nodes (STM32)
 - Easy maintenance and scalability
 - Standard communication protocols
 - Support for real-time monitoring
@@ -161,4 +167,4 @@ The architecture provides the following advantages:
 
 ## 8. Summary
 
-The proposed architecture establishes a complete IoT monitoring and control platform by integrating embedded devices, wireless communication, backend services, databases, and web technologies. The layered design simplifies system maintenance and allows future extensions without significant architectural modifications.
+The proposed architecture establishes a complete IoT laboratory monitoring and control platform by separating environmental monitoring from device control. The ESP8266 Monitoring Node is responsible for collecting and transmitting environmental data, while the STM32 Control Node focuses exclusively on controlling laboratory equipment through relay modules. This separation improves modularity, simplifies maintenance, enhances scalability, and allows future system expansion without significantly affecting the overall architecture.

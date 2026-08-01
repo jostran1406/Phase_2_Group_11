@@ -1,130 +1,176 @@
 <mxfile host="65bd71144e">
-    <diagram id="feewVo-PwuGQB74M2WhK" name="Page-4">
-        <mxGraphModel dx="166" dy="173" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" background="#ffffff" math="0" shadow="0">
+    <diagram id="qoFp6jjqG6r4QMgZGOIM" name="Page-2">
+        <mxGraphModel dx="146" dy="171" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" background="#ffffff" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
-                <UserObject label="" mermaidData="{&#xa;  &quot;data&quot;: &quot;flowchart LR\n\n%%========================\n%% User Layer\n%%========================\nsubgraph UL[\&quot;User Layer\&quot;]\n    USER[\&quot;👤 User\&quot;]\nend\n\n%%========================\n%% Application Layer\n%%========================\nsubgraph AL[\&quot;Application Layer\&quot;]\n    FE[\&quot;🖥️ Frontend Dashboard\&quot;]\n    BE[\&quot;⚙️ Backend Server\&quot;]\n    DB[(\&quot;🗄️ MySQL Database\&quot;)]\nend\n\n%%========================\n%% Communication Layer\n%%========================\nsubgraph CL[\&quot;Communication Layer\&quot;]\n    ESP[\&quot;📡 ESP8266 Gateway\&quot;]\nend\n\n%%========================\n%% Embedded Layer\n%%========================\nsubgraph EL[\&quot;Embedded Layer\&quot;]\n    STM[\&quot;STM32 Controller\&quot;]\n    SENSOR[\&quot;Sensor Module\&quot;]\n    RELAY[\&quot;Relay Module\&quot;]\nend\n\n%%========================\n%% Communication\n%%========================\n\nUSER &lt;--&gt;|HTTPS| FE\n\nFE &lt;--&gt;|REST API (HTTP/HTTPS)| BE\n\nBE &lt;--&gt;|SQL| DB\n\nBE &lt;--&gt;|MQTT / HTTP| ESP\n\nESP &lt;--&gt;|UART| STM\n\nSTM &lt;--&gt;|GPIO / ADC / I²C| SENSOR\n\nSTM --&gt;|GPIO Control| RELAY&quot;,&#xa;  &quot;config&quot;: null&#xa;}" id="2">
-                    <mxCell style="group;transparentBounds=1;editIcon=1;lockedGroup=0;groupPadding=10;" parent="1" connectable="0" vertex="1">
+                <UserObject label="" mermaidData="{&#xa;  &quot;data&quot;: &quot;flowchart LR\n\nUSER[User]\n\nFE[Frontend Dashboard]\n\nBE[Backend Server]\n\nDB[(MySQL Database)]\n\nESP[ESP8266 Monitoring Node]\n\nSTM[STM32 Control Node]\n\nTEMP[Temperature Sensor]\nHUM[Humidity Sensor]\nLIGHT[Light Sensor]\n\nRELAY[Relay Module]\n\nFAN[Fan]\nLAMP[Light]\nBUZZER[Buzzer]\n\nUSER -- HTTPS --&gt; FE\n\nFE -- REST API --&gt; BE\n\nBE -- SQL --&gt; DB\n\nTEMP -- I2C / GPIO --&gt; ESP\nHUM -- I2C / GPIO --&gt; ESP\nLIGHT -- I2C / GPIO --&gt; ESP\n\nESP -- MQTT / HTTP --&gt; BE\n\nBE -- Control Command --&gt; STM\n\nSTM -- GPIO --&gt; RELAY\n\nRELAY --&gt; FAN\nRELAY --&gt; LAMP\nRELAY --&gt; BUZZER&quot;,&#xa;  &quot;config&quot;: null&#xa;}" id="HTR8Mz4n9ioAGpkBbezS-1">
+                    <mxCell style="group;transparentBounds=1;editIcon=1;lockedGroup=0;groupPadding=10;" connectable="0" vertex="1" parent="1">
                         <mxGeometry as="geometry"/>
                     </mxCell>
                 </UserObject>
-                <UserObject label="User Layer" mermaidId="n:UL" mermaidBaseStyle="html=1;whiteSpace=wrap;strokeWidth=1;verticalAlign=top;fillColor=light-dark(#ffffde,#1f2020);strokeColor=light-dark(#aaaa33,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" mermaidBaseValue="User Layer" id="3">
-                    <mxCell style="html=1;whiteSpace=wrap;strokeWidth=1;verticalAlign=top;fillColor=light-dark(#ffffde,#1f2020);strokeColor=light-dark(#aaaa33,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" parent="2" vertex="1">
-                        <mxGeometry x="30" y="229" width="189" height="124" as="geometry"/>
+                <UserObject label="User" mermaidId="n:USER" mermaidBaseStyle="html=1;whiteSpace=wrap;strokeWidth=1;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" mermaidBaseValue="User" id="HTR8Mz4n9ioAGpkBbezS-2">
+                    <mxCell style="html=1;whiteSpace=wrap;strokeWidth=1;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" vertex="1" parent="HTR8Mz4n9ioAGpkBbezS-1">
+                        <mxGeometry x="86" y="30" width="92" height="54" as="geometry"/>
                     </mxCell>
                 </UserObject>
-                <UserObject label="👤 User" mermaidId="n:USER" mermaidBaseStyle="html=1;whiteSpace=wrap;strokeWidth=1;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" mermaidBaseValue="👤 User" id="4">
-                    <mxCell style="html=1;whiteSpace=wrap;strokeWidth=1;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" parent="3" vertex="1">
-                        <mxGeometry x="35" y="45" width="119" height="54" as="geometry"/>
+                <UserObject label="Frontend Dashboard" mermaidId="n:FE" mermaidBaseStyle="html=1;whiteSpace=wrap;strokeWidth=1;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" mermaidBaseValue="Frontend Dashboard" id="HTR8Mz4n9ioAGpkBbezS-3">
+                    <mxCell style="html=1;whiteSpace=wrap;strokeWidth=1;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" vertex="1" parent="HTR8Mz4n9ioAGpkBbezS-1">
+                        <mxGeometry x="377" y="30" width="204" height="54" as="geometry"/>
                     </mxCell>
                 </UserObject>
-                <UserObject label="Application Layer" mermaidId="n:AL" mermaidBaseStyle="html=1;whiteSpace=wrap;strokeWidth=1;verticalAlign=top;fillColor=light-dark(#ffffde,#1f2020);strokeColor=light-dark(#aaaa33,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" mermaidBaseValue="Application Layer" id="5">
-                    <mxCell style="html=1;whiteSpace=wrap;strokeWidth=1;verticalAlign=top;fillColor=light-dark(#ffffde,#1f2020);strokeColor=light-dark(#aaaa33,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" parent="2" vertex="1">
-                        <mxGeometry x="295" y="229" width="1074" height="150" as="geometry"/>
+                <UserObject label="Backend Server" mermaidId="n:BE" mermaidBaseStyle="html=1;whiteSpace=wrap;strokeWidth=1;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" mermaidBaseValue="Backend Server" id="HTR8Mz4n9ioAGpkBbezS-4">
+                    <mxCell style="html=1;whiteSpace=wrap;strokeWidth=1;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" vertex="1" parent="HTR8Mz4n9ioAGpkBbezS-1">
+                        <mxGeometry x="745" y="134" width="170" height="54" as="geometry"/>
                     </mxCell>
                 </UserObject>
-                <UserObject label="&amp;nbsp;Frontend Dashboard" mermaidId="n:FE" mermaidBaseStyle="html=1;whiteSpace=wrap;strokeWidth=1;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" mermaidBaseValue="🖥️ Frontend Dashboard" id="6">
-                    <mxCell style="html=1;whiteSpace=wrap;strokeWidth=1;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" parent="5" vertex="1">
-                        <mxGeometry x="35" y="45" width="231" height="54" as="geometry"/>
+                <UserObject label="MySQL Database" mermaidId="n:DB" mermaidBaseStyle="html=1;shape=cylinder3;boundedLbl=1;backgroundOutline=1;size=10;strokeWidth=1;whiteSpace=wrap;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" mermaidBaseValue="MySQL Database" id="HTR8Mz4n9ioAGpkBbezS-5">
+                    <mxCell style="html=1;shape=cylinder3;boundedLbl=1;backgroundOutline=1;size=10;strokeWidth=1;whiteSpace=wrap;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" vertex="1" parent="HTR8Mz4n9ioAGpkBbezS-1">
+                        <mxGeometry x="1130" y="72" width="131" height="67" as="geometry"/>
                     </mxCell>
                 </UserObject>
-                <UserObject label="&amp;nbsp;Backend Server" mermaidId="n:BE" mermaidBaseStyle="html=1;whiteSpace=wrap;strokeWidth=1;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" mermaidBaseValue="⚙️ Backend Server" id="7">
-                    <mxCell style="html=1;whiteSpace=wrap;strokeWidth=1;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" parent="5" vertex="1">
-                        <mxGeometry x="486" y="45" width="197" height="54" as="geometry"/>
+                <UserObject label="ESP8266 Monitoring Node" mermaidId="n:ESP" mermaidBaseStyle="html=1;whiteSpace=wrap;strokeWidth=1;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" mermaidBaseValue="ESP8266 Monitoring Node" id="HTR8Mz4n9ioAGpkBbezS-6">
+                    <mxCell style="html=1;whiteSpace=wrap;strokeWidth=1;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" vertex="1" parent="HTR8Mz4n9ioAGpkBbezS-1">
+                        <mxGeometry x="358" y="238" width="241" height="54" as="geometry"/>
                     </mxCell>
                 </UserObject>
-                <UserObject label="&amp;nbsp;MySQL Database" mermaidId="n:DB" mermaidBaseStyle="html=1;shape=cylinder3;boundedLbl=1;backgroundOutline=1;size=10;strokeWidth=1;whiteSpace=wrap;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" mermaidBaseValue="🗄️ MySQL Database" id="8">
-                    <mxCell style="html=1;shape=cylinder3;boundedLbl=1;backgroundOutline=1;size=10;strokeWidth=1;whiteSpace=wrap;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" parent="5" vertex="1">
-                        <mxGeometry x="882" y="58" width="157" height="67" as="geometry"/>
+                <UserObject label="STM32 Control Node" mermaidId="n:STM" mermaidBaseStyle="html=1;whiteSpace=wrap;strokeWidth=1;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" mermaidBaseValue="STM32 Control Node" id="HTR8Mz4n9ioAGpkBbezS-7">
+                    <mxCell style="html=1;whiteSpace=wrap;strokeWidth=1;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" vertex="1" parent="HTR8Mz4n9ioAGpkBbezS-1">
+                        <mxGeometry x="1093" y="189" width="204" height="54" as="geometry"/>
                     </mxCell>
                 </UserObject>
-                <UserObject label="REST API (HTTP/HTTPS)" mermaidId="e:FE-&gt;BE#0" mermaidBaseStyle="curved=1;startArrow=block;startSize=7;endArrow=block;endSize=7;strokeColor=light-dark(#333333,#cccccc);html=1;fontSize=16;labelBackgroundColor=light-dark(#E8E8E88D,#2a2a2a8D);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);exitX=1;exitY=0.5;entryX=0;entryY=0.5;" mermaidBaseValue="REST API (HTTP/HTTPS)" id="9">
-                    <mxCell style="curved=1;startArrow=block;startSize=7;endArrow=block;endSize=7;strokeColor=light-dark(#333333,#cccccc);html=1;fontSize=16;labelBackgroundColor=light-dark(#E8E8E88D,#2a2a2a8D);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);exitX=1;exitY=0.5;entryX=0;entryY=0.5;rounded=0;" parent="5" source="6" target="7" edge="1">
+                <UserObject label="Temperature Sensor" mermaidId="n:TEMP" mermaidBaseStyle="html=1;whiteSpace=wrap;strokeWidth=1;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" mermaidBaseValue="Temperature Sensor" id="HTR8Mz4n9ioAGpkBbezS-8">
+                    <mxCell style="html=1;whiteSpace=wrap;strokeWidth=1;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" vertex="1" parent="HTR8Mz4n9ioAGpkBbezS-1">
+                        <mxGeometry x="30" y="134" width="203" height="54" as="geometry"/>
+                    </mxCell>
+                </UserObject>
+                <UserObject label="Humidity Sensor" mermaidId="n:HUM" mermaidBaseStyle="html=1;whiteSpace=wrap;strokeWidth=1;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" mermaidBaseValue="Humidity Sensor" id="HTR8Mz4n9ioAGpkBbezS-9">
+                    <mxCell style="html=1;whiteSpace=wrap;strokeWidth=1;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" vertex="1" parent="HTR8Mz4n9ioAGpkBbezS-1">
+                        <mxGeometry x="44" y="238" width="176" height="54" as="geometry"/>
+                    </mxCell>
+                </UserObject>
+                <UserObject label="Light Sensor" mermaidId="n:LIGHT" mermaidBaseStyle="html=1;whiteSpace=wrap;strokeWidth=1;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" mermaidBaseValue="Light Sensor" id="HTR8Mz4n9ioAGpkBbezS-10">
+                    <mxCell style="html=1;whiteSpace=wrap;strokeWidth=1;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" vertex="1" parent="HTR8Mz4n9ioAGpkBbezS-1">
+                        <mxGeometry x="58" y="342" width="147" height="54" as="geometry"/>
+                    </mxCell>
+                </UserObject>
+                <UserObject label="Relay Module" mermaidId="n:RELAY" mermaidBaseStyle="html=1;whiteSpace=wrap;strokeWidth=1;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" mermaidBaseValue="Relay Module" id="HTR8Mz4n9ioAGpkBbezS-11">
+                    <mxCell style="html=1;whiteSpace=wrap;strokeWidth=1;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" vertex="1" parent="HTR8Mz4n9ioAGpkBbezS-1">
+                        <mxGeometry x="1382" y="189" width="154" height="54" as="geometry"/>
+                    </mxCell>
+                </UserObject>
+                <UserObject label="Fan" mermaidId="n:FAN" mermaidBaseStyle="html=1;whiteSpace=wrap;strokeWidth=1;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" mermaidBaseValue="Fan" id="HTR8Mz4n9ioAGpkBbezS-12">
+                    <mxCell style="html=1;whiteSpace=wrap;strokeWidth=1;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" vertex="1" parent="HTR8Mz4n9ioAGpkBbezS-1">
+                        <mxGeometry x="1597" y="85" width="86" height="54" as="geometry"/>
+                    </mxCell>
+                </UserObject>
+                <UserObject label="Light" mermaidId="n:LAMP" mermaidBaseStyle="html=1;whiteSpace=wrap;strokeWidth=1;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" mermaidBaseValue="Light" id="HTR8Mz4n9ioAGpkBbezS-13">
+                    <mxCell style="html=1;whiteSpace=wrap;strokeWidth=1;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" vertex="1" parent="HTR8Mz4n9ioAGpkBbezS-1">
+                        <mxGeometry x="1592" y="189" width="96" height="54" as="geometry"/>
+                    </mxCell>
+                </UserObject>
+                <UserObject label="Buzzer" mermaidId="n:BUZZER" mermaidBaseStyle="html=1;whiteSpace=wrap;strokeWidth=1;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" mermaidBaseValue="Buzzer" id="HTR8Mz4n9ioAGpkBbezS-14">
+                    <mxCell style="html=1;whiteSpace=wrap;strokeWidth=1;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" vertex="1" parent="HTR8Mz4n9ioAGpkBbezS-1">
+                        <mxGeometry x="1586" y="293" width="108" height="54" as="geometry"/>
+                    </mxCell>
+                </UserObject>
+                <UserObject label="HTTPS" mermaidId="e:USER-&gt;FE#0" mermaidBaseStyle="curved=1;startArrow=none;endArrow=block;endSize=7;strokeColor=light-dark(#333333,#cccccc);html=1;fontSize=16;labelBackgroundColor=light-dark(#E8E8E88D,#2a2a2a8D);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);exitX=1;exitY=0.5;entryX=0;entryY=0.5;" mermaidBaseValue="HTTPS" id="HTR8Mz4n9ioAGpkBbezS-15">
+                    <mxCell style="curved=1;startArrow=none;endArrow=block;endSize=7;strokeColor=light-dark(#333333,#cccccc);html=1;fontSize=16;labelBackgroundColor=light-dark(#E8E8E88D,#2a2a2a8D);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);exitX=1;exitY=0.5;entryX=0;entryY=0.5;rounded=0;" edge="1" parent="HTR8Mz4n9ioAGpkBbezS-1" source="HTR8Mz4n9ioAGpkBbezS-2" target="HTR8Mz4n9ioAGpkBbezS-3">
                         <mxGeometry relative="1" as="geometry">
                             <Array as="points"/>
                         </mxGeometry>
                     </mxCell>
                 </UserObject>
-                <UserObject label="SQL" mermaidId="e:BE-&gt;DB#0" mermaidBaseStyle="curved=1;startArrow=block;startSize=7;endArrow=block;endSize=7;strokeColor=light-dark(#333333,#cccccc);html=1;fontSize=16;labelBackgroundColor=light-dark(#E8E8E88D,#2a2a2a8D);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);exitX=1;exitY=0.7;entryX=0;entryY=0.51;" mermaidBaseValue="SQL" id="10">
-                    <mxCell style="curved=1;startArrow=block;startSize=7;endArrow=block;endSize=7;strokeColor=light-dark(#333333,#cccccc);html=1;fontSize=16;labelBackgroundColor=light-dark(#E8E8E88D,#2a2a2a8D);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);exitX=1;exitY=0.7;entryX=0;entryY=0.51;rounded=0;" parent="5" source="7" target="8" edge="1">
+                <UserObject label="REST API" mermaidId="e:FE-&gt;BE#0" mermaidBaseStyle="curved=1;startArrow=none;endArrow=block;endSize=7;strokeColor=light-dark(#333333,#cccccc);html=1;fontSize=16;labelBackgroundColor=light-dark(#E8E8E88D,#2a2a2a8D);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);exitX=1;exitY=0.5;entryX=0.26;entryY=0;" mermaidBaseValue="REST API" id="HTR8Mz4n9ioAGpkBbezS-16">
+                    <mxCell style="curved=1;startArrow=none;endArrow=block;endSize=7;strokeColor=light-dark(#333333,#cccccc);html=1;fontSize=16;labelBackgroundColor=light-dark(#E8E8E88D,#2a2a2a8D);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);exitX=1;exitY=0.5;entryX=0.26;entryY=0;rounded=0;" edge="1" parent="HTR8Mz4n9ioAGpkBbezS-1" source="HTR8Mz4n9ioAGpkBbezS-3" target="HTR8Mz4n9ioAGpkBbezS-4">
                         <mxGeometry relative="1" as="geometry">
                             <Array as="points">
-                                <mxPoint x="756" y="92"/>
-                                <mxPoint x="829" y="92"/>
+                                <mxPoint x="672" y="57"/>
                             </Array>
                         </mxGeometry>
                     </mxCell>
                 </UserObject>
-                <UserObject label="Communication Layer" mermaidId="n:CL" mermaidBaseStyle="html=1;whiteSpace=wrap;strokeWidth=1;verticalAlign=top;fillColor=light-dark(#ffffde,#1f2020);strokeColor=light-dark(#aaaa33,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" mermaidBaseValue="Communication Layer" id="11">
-                    <mxCell style="html=1;whiteSpace=wrap;strokeWidth=1;verticalAlign=top;fillColor=light-dark(#ffffde,#1f2020);strokeColor=light-dark(#aaaa33,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" parent="2" vertex="1">
-                        <mxGeometry x="1114" y="82" width="283" height="124" as="geometry"/>
-                    </mxCell>
-                </UserObject>
-                <UserObject label="ESP8266 Gateway" mermaidId="n:ESP" mermaidBaseStyle="html=1;whiteSpace=wrap;strokeWidth=1;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" mermaidBaseValue="📡 ESP8266 Gateway" id="12">
-                    <mxCell style="html=1;whiteSpace=wrap;strokeWidth=1;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" parent="11" vertex="1">
-                        <mxGeometry x="35" y="45" width="213" height="54" as="geometry"/>
-                    </mxCell>
-                </UserObject>
-                <UserObject label="Embedded Layer" mermaidId="n:EL" mermaidBaseStyle="html=1;whiteSpace=wrap;strokeWidth=1;verticalAlign=top;fillColor=light-dark(#ffffde,#1f2020);strokeColor=light-dark(#aaaa33,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" mermaidBaseValue="Embedded Layer" id="13">
-                    <mxCell style="html=1;whiteSpace=wrap;strokeWidth=1;verticalAlign=top;fillColor=light-dark(#ffffde,#1f2020);strokeColor=light-dark(#aaaa33,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" parent="2" vertex="1">
-                        <mxGeometry x="1465" y="30" width="584" height="228" as="geometry"/>
-                    </mxCell>
-                </UserObject>
-                <UserObject label="STM32 Controller" mermaidId="n:STM" mermaidBaseStyle="html=1;whiteSpace=wrap;strokeWidth=1;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" mermaidBaseValue="STM32 Controller" id="14">
-                    <mxCell style="html=1;whiteSpace=wrap;strokeWidth=1;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" parent="13" vertex="1">
-                        <mxGeometry x="35" y="97" width="182" height="54" as="geometry"/>
-                    </mxCell>
-                </UserObject>
-                <UserObject label="Sensor Module" mermaidId="n:SENSOR" mermaidBaseStyle="html=1;whiteSpace=wrap;strokeWidth=1;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" mermaidBaseValue="Sensor Module" id="15">
-                    <mxCell style="html=1;whiteSpace=wrap;strokeWidth=1;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" parent="13" vertex="1">
-                        <mxGeometry x="387" y="149" width="162" height="54" as="geometry"/>
-                    </mxCell>
-                </UserObject>
-                <UserObject label="Relay Module" mermaidId="n:RELAY" mermaidBaseStyle="html=1;whiteSpace=wrap;strokeWidth=1;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" mermaidBaseValue="Relay Module" id="16">
-                    <mxCell style="html=1;whiteSpace=wrap;strokeWidth=1;fillColor=light-dark(#ECECFF,#1f2020);strokeColor=light-dark(#9370DB,#cccccc);fontColor=light-dark(#333333,#cccccc);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" parent="13" vertex="1">
-                        <mxGeometry x="391" y="45" width="154" height="54" as="geometry"/>
-                    </mxCell>
-                </UserObject>
-                <UserObject label="GPIO / ADC / I²C" mermaidId="e:STM-&gt;SENSOR#0" mermaidBaseStyle="curved=1;startArrow=block;startSize=7;endArrow=block;endSize=7;strokeColor=light-dark(#333333,#cccccc);html=1;fontSize=16;labelBackgroundColor=light-dark(#E8E8E88D,#2a2a2a8D);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);exitX=1;exitY=1;entryX=0;entryY=0.5;" mermaidBaseValue="GPIO / ADC / I²C" id="17">
-                    <mxCell style="curved=1;startArrow=block;startSize=7;endArrow=block;endSize=7;strokeColor=light-dark(#333333,#cccccc);html=1;fontSize=16;labelBackgroundColor=light-dark(#E8E8E88D,#2a2a2a8D);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);exitX=1;exitY=1;entryX=0;entryY=0.5;rounded=0;" parent="13" source="14" target="15" edge="1">
+                <UserObject label="SQL" mermaidId="e:BE-&gt;DB#0" mermaidBaseStyle="curved=1;startArrow=none;endArrow=block;endSize=7;strokeColor=light-dark(#333333,#cccccc);html=1;fontSize=16;labelBackgroundColor=light-dark(#E8E8E88D,#2a2a2a8D);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);exitX=1;exitY=0;entryX=0;entryY=0.51;" mermaidBaseValue="SQL" id="HTR8Mz4n9ioAGpkBbezS-17">
+                    <mxCell style="curved=1;startArrow=none;endArrow=block;endSize=7;strokeColor=light-dark(#333333,#cccccc);html=1;fontSize=16;labelBackgroundColor=light-dark(#E8E8E88D,#2a2a2a8D);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);exitX=1;exitY=0;entryX=0;entryY=0.51;rounded=0;" edge="1" parent="HTR8Mz4n9ioAGpkBbezS-1" source="HTR8Mz4n9ioAGpkBbezS-4" target="HTR8Mz4n9ioAGpkBbezS-5">
                         <mxGeometry relative="1" as="geometry">
                             <Array as="points">
-                                <mxPoint x="302" y="176"/>
+                                <mxPoint x="1004" y="106"/>
                             </Array>
                         </mxGeometry>
                     </mxCell>
                 </UserObject>
-                <UserObject label="GPIO Control" mermaidId="e:STM-&gt;RELAY#0" mermaidBaseStyle="curved=1;startArrow=none;endArrow=block;endSize=7;strokeColor=light-dark(#333333,#cccccc);html=1;fontSize=16;labelBackgroundColor=light-dark(#E8E8E88D,#2a2a2a8D);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);exitX=1;exitY=0;entryX=0;entryY=0.5;" mermaidBaseValue="GPIO Control" id="18">
-                    <mxCell style="curved=1;startArrow=none;endArrow=block;endSize=7;strokeColor=light-dark(#333333,#cccccc);html=1;fontSize=16;labelBackgroundColor=light-dark(#E8E8E88D,#2a2a2a8D);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);exitX=1;exitY=0;entryX=0;entryY=0.5;rounded=0;" parent="13" source="14" target="16" edge="1">
+                <UserObject label="I2C / GPIO" mermaidId="e:TEMP-&gt;ESP#0" mermaidBaseStyle="curved=1;startArrow=none;endArrow=block;endSize=7;strokeColor=light-dark(#333333,#cccccc);html=1;fontSize=16;labelBackgroundColor=light-dark(#E8E8E88D,#2a2a2a8D);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);exitX=1;exitY=0.5;entryX=0.3;entryY=0;" mermaidBaseValue="I2C / GPIO" id="HTR8Mz4n9ioAGpkBbezS-18">
+                    <mxCell style="curved=1;startArrow=none;endArrow=block;endSize=7;strokeColor=light-dark(#333333,#cccccc);html=1;fontSize=16;labelBackgroundColor=light-dark(#E8E8E88D,#2a2a2a8D);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);exitX=1;exitY=0.5;entryX=0.3;entryY=0;rounded=0;" edge="1" parent="HTR8Mz4n9ioAGpkBbezS-1" source="HTR8Mz4n9ioAGpkBbezS-8" target="HTR8Mz4n9ioAGpkBbezS-6">
                         <mxGeometry relative="1" as="geometry">
                             <Array as="points">
-                                <mxPoint x="302" y="72"/>
+                                <mxPoint x="296" y="161"/>
                             </Array>
                         </mxGeometry>
                     </mxCell>
                 </UserObject>
-                <UserObject label="HTTPS" mermaidId="e:USER-&gt;FE#0" mermaidBaseStyle="curved=1;startArrow=block;startSize=7;endArrow=block;endSize=7;strokeColor=light-dark(#333333,#cccccc);html=1;fontSize=16;labelBackgroundColor=light-dark(#E8E8E88D,#2a2a2a8D);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);exitX=1;exitY=0.5;entryX=0;entryY=0.5;" mermaidBaseValue="HTTPS" id="19">
-                    <mxCell style="curved=1;startArrow=block;startSize=7;endArrow=block;endSize=7;strokeColor=light-dark(#333333,#cccccc);html=1;fontSize=16;labelBackgroundColor=light-dark(#E8E8E88D,#2a2a2a8D);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);exitX=1;exitY=0.5;entryX=0;entryY=0.5;rounded=0;" parent="2" source="4" target="6" edge="1">
+                <UserObject label="I2C / GPIO" mermaidId="e:HUM-&gt;ESP#0" mermaidBaseStyle="curved=1;startArrow=none;endArrow=block;endSize=7;strokeColor=light-dark(#333333,#cccccc);html=1;fontSize=16;labelBackgroundColor=light-dark(#E8E8E88D,#2a2a2a8D);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);exitX=1;exitY=0.5;entryX=0;entryY=0.5;" mermaidBaseValue="I2C / GPIO" id="HTR8Mz4n9ioAGpkBbezS-19">
+                    <mxCell style="curved=1;startArrow=none;endArrow=block;endSize=7;strokeColor=light-dark(#333333,#cccccc);html=1;fontSize=16;labelBackgroundColor=light-dark(#E8E8E88D,#2a2a2a8D);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);exitX=1;exitY=0.5;entryX=0;entryY=0.5;rounded=0;" edge="1" parent="HTR8Mz4n9ioAGpkBbezS-1" source="HTR8Mz4n9ioAGpkBbezS-9" target="HTR8Mz4n9ioAGpkBbezS-6">
                         <mxGeometry relative="1" as="geometry">
                             <Array as="points"/>
                         </mxGeometry>
                     </mxCell>
                 </UserObject>
-                <UserObject label="MQTT / HTTP" mermaidId="e:BE-&gt;ESP#0" mermaidBaseStyle="curved=1;startArrow=block;startSize=7;endArrow=block;endSize=7;strokeColor=light-dark(#333333,#cccccc);html=1;fontSize=16;labelBackgroundColor=light-dark(#E8E8E88D,#2a2a2a8D);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);exitX=1;exitY=0.3;entryX=0.37;entryY=1;" mermaidBaseValue="MQTT / HTTP" id="20">
-                    <mxCell style="curved=1;startArrow=block;startSize=7;endArrow=block;endSize=7;strokeColor=light-dark(#333333,#cccccc);html=1;fontSize=16;labelBackgroundColor=light-dark(#E8E8E88D,#2a2a2a8D);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);exitX=1;exitY=0.3;entryX=0.37;entryY=1;rounded=0;" parent="2" source="7" target="12" edge="1">
+                <UserObject label="I2C / GPIO" mermaidId="e:LIGHT-&gt;ESP#0" mermaidBaseStyle="curved=1;startArrow=none;endArrow=block;endSize=7;strokeColor=light-dark(#333333,#cccccc);html=1;fontSize=16;labelBackgroundColor=light-dark(#E8E8E88D,#2a2a2a8D);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);exitX=1;exitY=0.5;entryX=0.3;entryY=1;" mermaidBaseValue="I2C / GPIO" id="HTR8Mz4n9ioAGpkBbezS-20">
+                    <mxCell style="curved=1;startArrow=none;endArrow=block;endSize=7;strokeColor=light-dark(#333333,#cccccc);html=1;fontSize=16;labelBackgroundColor=light-dark(#E8E8E88D,#2a2a2a8D);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);exitX=1;exitY=0.5;entryX=0.3;entryY=1;rounded=0;" edge="1" parent="HTR8Mz4n9ioAGpkBbezS-1" source="HTR8Mz4n9ioAGpkBbezS-10" target="HTR8Mz4n9ioAGpkBbezS-6">
                         <mxGeometry relative="1" as="geometry">
                             <Array as="points">
-                                <mxPoint x="1051" y="282"/>
-                                <mxPoint x="1124" y="282"/>
+                                <mxPoint x="296" y="369"/>
                             </Array>
                         </mxGeometry>
                     </mxCell>
                 </UserObject>
-                <UserObject label="UART" mermaidId="e:ESP-&gt;STM#0" mermaidBaseStyle="curved=1;startArrow=block;startSize=7;endArrow=block;endSize=7;strokeColor=light-dark(#333333,#cccccc);html=1;fontSize=16;labelBackgroundColor=light-dark(#E8E8E88D,#2a2a2a8D);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);exitX=1;exitY=0.5;entryX=0;entryY=0.5;" mermaidBaseValue="UART" id="21">
-                    <mxCell style="curved=1;startArrow=block;startSize=7;endArrow=block;endSize=7;strokeColor=light-dark(#333333,#cccccc);html=1;fontSize=16;labelBackgroundColor=light-dark(#E8E8E88D,#2a2a2a8D);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);exitX=1;exitY=0.5;entryX=0;entryY=0.5;rounded=0;" parent="2" source="12" target="14" edge="1">
+                <UserObject label="MQTT / HTTP" mermaidId="e:ESP-&gt;BE#0" mermaidBaseStyle="curved=1;startArrow=none;endArrow=block;endSize=7;strokeColor=light-dark(#333333,#cccccc);html=1;fontSize=16;labelBackgroundColor=light-dark(#E8E8E88D,#2a2a2a8D);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);exitX=1;exitY=0.5;entryX=0.26;entryY=1;" mermaidBaseValue="MQTT / HTTP" id="HTR8Mz4n9ioAGpkBbezS-21">
+                    <mxCell style="curved=1;startArrow=none;endArrow=block;endSize=7;strokeColor=light-dark(#333333,#cccccc);html=1;fontSize=16;labelBackgroundColor=light-dark(#E8E8E88D,#2a2a2a8D);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);exitX=1;exitY=0.5;entryX=0.26;entryY=1;rounded=0;" edge="1" parent="HTR8Mz4n9ioAGpkBbezS-1" source="HTR8Mz4n9ioAGpkBbezS-6" target="HTR8Mz4n9ioAGpkBbezS-4">
+                        <mxGeometry relative="1" as="geometry">
+                            <Array as="points">
+                                <mxPoint x="672" y="265"/>
+                            </Array>
+                        </mxGeometry>
+                    </mxCell>
+                </UserObject>
+                <UserObject label="Control Command" mermaidId="e:BE-&gt;STM#0" mermaidBaseStyle="curved=1;startArrow=none;endArrow=block;endSize=7;strokeColor=light-dark(#333333,#cccccc);html=1;fontSize=16;labelBackgroundColor=light-dark(#E8E8E88D,#2a2a2a8D);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);exitX=1;exitY=1;entryX=0;entryY=0.5;" mermaidBaseValue="Control Command" id="HTR8Mz4n9ioAGpkBbezS-22">
+                    <mxCell style="curved=1;startArrow=none;endArrow=block;endSize=7;strokeColor=light-dark(#333333,#cccccc);html=1;fontSize=16;labelBackgroundColor=light-dark(#E8E8E88D,#2a2a2a8D);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);exitX=1;exitY=1;entryX=0;entryY=0.5;rounded=0;" edge="1" parent="HTR8Mz4n9ioAGpkBbezS-1" source="HTR8Mz4n9ioAGpkBbezS-4" target="HTR8Mz4n9ioAGpkBbezS-7">
+                        <mxGeometry relative="1" as="geometry">
+                            <Array as="points">
+                                <mxPoint x="1004" y="216"/>
+                            </Array>
+                        </mxGeometry>
+                    </mxCell>
+                </UserObject>
+                <UserObject label="GPIO" mermaidId="e:STM-&gt;RELAY#0" mermaidBaseStyle="curved=1;startArrow=none;endArrow=block;endSize=7;strokeColor=light-dark(#333333,#cccccc);html=1;fontSize=16;labelBackgroundColor=light-dark(#E8E8E88D,#2a2a2a8D);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);exitX=1;exitY=0.5;entryX=0;entryY=0.5;" mermaidBaseValue="GPIO" id="HTR8Mz4n9ioAGpkBbezS-23">
+                    <mxCell style="curved=1;startArrow=none;endArrow=block;endSize=7;strokeColor=light-dark(#333333,#cccccc);html=1;fontSize=16;labelBackgroundColor=light-dark(#E8E8E88D,#2a2a2a8D);fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontColor=light-dark(#333333,#cccccc);exitX=1;exitY=0.5;entryX=0;entryY=0.5;rounded=0;" edge="1" parent="HTR8Mz4n9ioAGpkBbezS-1" source="HTR8Mz4n9ioAGpkBbezS-7" target="HTR8Mz4n9ioAGpkBbezS-11">
                         <mxGeometry relative="1" as="geometry">
                             <Array as="points"/>
+                        </mxGeometry>
+                    </mxCell>
+                </UserObject>
+                <UserObject label="" mermaidId="e:RELAY-&gt;FAN#0" mermaidBaseStyle="curved=1;startArrow=none;endArrow=block;endSize=7;strokeColor=light-dark(#333333,#cccccc);exitX=0.67;exitY=0;entryX=0;entryY=0.5;" mermaidBaseValue="" id="HTR8Mz4n9ioAGpkBbezS-24">
+                    <mxCell style="curved=1;startArrow=none;endArrow=block;endSize=7;strokeColor=light-dark(#333333,#cccccc);exitX=0.67;exitY=0;entryX=0;entryY=0.5;rounded=0;" edge="1" parent="HTR8Mz4n9ioAGpkBbezS-1" source="HTR8Mz4n9ioAGpkBbezS-11" target="HTR8Mz4n9ioAGpkBbezS-12">
+                        <mxGeometry relative="1" as="geometry">
+                            <Array as="points">
+                                <mxPoint x="1561" y="112"/>
+                            </Array>
+                        </mxGeometry>
+                    </mxCell>
+                </UserObject>
+                <UserObject label="" mermaidId="e:RELAY-&gt;LAMP#0" mermaidBaseStyle="curved=1;startArrow=none;endArrow=block;endSize=7;strokeColor=light-dark(#333333,#cccccc);exitX=1;exitY=0.5;entryX=0;entryY=0.5;" mermaidBaseValue="" id="HTR8Mz4n9ioAGpkBbezS-25">
+                    <mxCell style="curved=1;startArrow=none;endArrow=block;endSize=7;strokeColor=light-dark(#333333,#cccccc);exitX=1;exitY=0.5;entryX=0;entryY=0.5;rounded=0;" edge="1" parent="HTR8Mz4n9ioAGpkBbezS-1" source="HTR8Mz4n9ioAGpkBbezS-11" target="HTR8Mz4n9ioAGpkBbezS-13">
+                        <mxGeometry relative="1" as="geometry">
+                            <Array as="points"/>
+                        </mxGeometry>
+                    </mxCell>
+                </UserObject>
+                <UserObject label="" mermaidId="e:RELAY-&gt;BUZZER#0" mermaidBaseStyle="curved=1;startArrow=none;endArrow=block;endSize=7;strokeColor=light-dark(#333333,#cccccc);exitX=0.67;exitY=1;entryX=0;entryY=0.5;" mermaidBaseValue="" id="HTR8Mz4n9ioAGpkBbezS-26">
+                    <mxCell style="curved=1;startArrow=none;endArrow=block;endSize=7;strokeColor=light-dark(#333333,#cccccc);exitX=0.67;exitY=1;entryX=0;entryY=0.5;rounded=0;" edge="1" parent="HTR8Mz4n9ioAGpkBbezS-1" source="HTR8Mz4n9ioAGpkBbezS-11" target="HTR8Mz4n9ioAGpkBbezS-14">
+                        <mxGeometry relative="1" as="geometry">
+                            <Array as="points">
+                                <mxPoint x="1561" y="320"/>
+                            </Array>
                         </mxGeometry>
                     </mxCell>
                 </UserObject>
