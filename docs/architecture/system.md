@@ -101,12 +101,12 @@ The following diagram illustrates how sensor data and control commands flow thro
 
 ### Sensor Data Flow
 
-1. Sensors collect environmental data.
-2. STM32 processes sensor readings.
-3. ESP8266 transmits data to the backend server.
-4. Backend stores data in the MySQL database.
-5. Frontend retrieves data through REST APIs.
-6. Users monitor system status in real time.
+1. STM32 acquires sensor data using the sensor interfaces (BMP280, BH1750, and MQ135).
+2. STM32 packages the collected data into a communication payload.
+3. ESP8266 receives the payload via UART and converts it into an MQTT/HTTP message.
+4. The Backend Server receives the sensor data and stores it in the MySQL Database.
+5. The Frontend Dashboard retrieves the latest sensor data through REST APIs.
+6. Users monitor environmental conditions in real time via the web interface.
 
 ### Control Command Flow
 
@@ -124,6 +124,22 @@ The following diagram illustrates how sensor data and control commands flow thro
 The following sequence diagram illustrates the interaction between system components during monitoring and control operations.
 
 ![Sequence Diagram](sequence-diagram.png)
+
+### Main Operations
+
+The primary software operations illustrated in the sequence diagram include:
+
+- Sensor acquisition
+- Payload construction
+- UART communication
+- MQTT/HTTP data publishing
+- Database insertion
+- REST API request handling
+- Device control command processing
+- Relay control
+- Device status reporting
+
+These operations represent the interaction between the STM32 Controller, ESP8266 Gateway, Backend Server, Database, and Frontend Dashboard during both monitoring and control processes.
 
 The sequence begins with sensor data acquisition, followed by wireless data transmission to the backend server, database storage, dashboard visualization, user control requests, and finally hardware actuation through the STM32 controller.
 
