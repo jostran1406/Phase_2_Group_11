@@ -9,20 +9,21 @@ nav:
 
   - Architecture:
       - System Architecture: architecture/system.md
-      - STM32 Architecture: architecture/stm.md
+      - STM32 Architecture: architecture/stm32.md
       - ESP8266 Architecture: architecture/esp.md
       - Backend Architecture: architecture/backend.md
       - Frontend Architecture: architecture/frontend.md
 
   - API:
       - API Overview: api/index.md
-      - STM32 API: api/stm_api.md
+      - STM32 API: api/stm32_api.md
       - ESP8266 API: api/esp_api.md
       - Backend API: api/backend_api.md
 
   - User Guide:
       - User Guide: user-guide/user-guide.md
       - Installation Guide: user-guide/installation.md
+      - STM32 Build Guide: user-guide/stm32_build_guide.md
 
   - Testing:
       - Test Plan: test/test-plan.md
@@ -36,5 +37,6 @@ nav:
       - SoW: report/sow.md
       - Project Report: report/project-report.md
 
-  - Doxygen API:
+  - Doxygen API & Convention:
       - API Reference: doxygen/index.html
+      - STM32 Coding Convention: doxygen/stm32_coding_convention.md
