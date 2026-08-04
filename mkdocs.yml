@@ -38,5 +38,13 @@ nav:
       - Project Report: report/project-report.md
 
   - Doxygen API & Convention:
-      - API Reference: doxygen/index.html
+      # - API Reference: doxygen/index.html
       - STM32 Coding Convention: doxygen/stm32_coding_convention.md
+
+markdown_extensions:
+  - pymdownx.superfences
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
