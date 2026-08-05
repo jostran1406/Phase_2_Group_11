@@ -45,5 +45,4 @@ Serial.println("[esp_network] ...");
 Serial.println("[main] ...");
 ```
 
-## 7. Architecture Note
-This firmware follows the confirmed System Architecture (SP1-08): ESP8266 is a standalone Monitoring Node with **no UART link to STM32**. Do not re-add STM32-specific UART code without confirming the architecture has changed again.
+
