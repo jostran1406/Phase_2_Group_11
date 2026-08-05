@@ -17,7 +17,7 @@ Backend Server --Control Command--> STM32 Control Node --GPIO--> Relay Module --
 | `float esp_read_light()` | — | `float` (0-1023 raw ADC), `-1` on failure | Reads the LDR light sensor. |
 | `SensorData esp_read_all()` | — | `SensorData` | Reads all 3 sensors, validates, and packages the result. |
 
-### `SensorData` struct (matches the Backend's `SENSOR_DATA` schema exactly)
+### `SensorData` struct
 ```cpp
 struct SensorData {
     float temperature;
