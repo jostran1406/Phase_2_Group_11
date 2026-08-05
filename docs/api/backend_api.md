@@ -4,8 +4,6 @@
 
 The Backend API provides communication between the Frontend Dashboard, ESP8266 monitoring nodes, and the backend server. All APIs use REST architecture and JSON data format.
 
----
-
 ## 2. Authentication API
 
 ### POST /api/login
@@ -30,8 +28,6 @@ User authentication.
 }
 ```
 
----
-
 ## 3. Latest Sensor Data API
 
 ### GET /api/sensor/latest
@@ -48,8 +44,6 @@ Returns the most recent sensor data.
   "timestamp": "2026-08-05 10:30:00"
 }
 ```
-
----
 
 ## 4. Sensor History API
 
@@ -69,8 +63,6 @@ Returns historical sensor records.
   }
 ]
 ```
-
----
 
 ## 5. Device Control API
 
@@ -95,8 +87,6 @@ Control laboratory devices.
 }
 ```
 
----
-
 ## 6. Alert API
 
 ### GET /api/alerts
@@ -114,8 +104,6 @@ Returns alert history.
   }
 ]
 ```
-
----
 
 ## 7. Setting API
 
@@ -140,8 +128,6 @@ Update threshold configuration.
   "status": "success"
 }
 ```
-
----
 
 ## 8. ESP8266 Sensor Upload API
 
