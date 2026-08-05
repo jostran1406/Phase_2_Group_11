@@ -45,7 +45,7 @@ Open `esp_network.h`:
 #define BACKEND_URL     "http://<backend-ip>:<port>/api/sensor/upload"
 #define DEVICE_ID       "NODE_01"
 ```
-Open `esp_network.cpp` and check the NTP timezone if the project targets a location other than Vietnam (UTC+7):
+
 ```cpp
 static const long GMT_OFFSET_SEC = 7 * 3600;
 ```
