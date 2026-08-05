@@ -45,7 +45,7 @@ struct SensorData {
 > This module has **no command-polling function** — see the architecture note above.
 
 ## 3. `POST /api/sensor/upload` — Request Body
-Matches the Backend API doc exactly, no extra/missing fields:
+
 ```json
 {
   "device_id": "NODE_01",
