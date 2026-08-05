@@ -65,6 +65,4 @@ struct SensorData {
 ```
 HTTP 2xx → treated as success. Otherwise, `main.ino` retries up to `MAX_RETRY` times before dropping that cycle's reading.
 
-## 5. Out of scope for ESP8266 (handled elsewhere)
-- **Control Command / Relay control** (Fan, Light, Buzzer) — handled directly between Backend Server and STM32 Control Node, per the System Architecture diagram. ESP8266 does not participate in this path.
-- If a future architecture revision routes control commands back through ESP8266, re-introduce a `esp_network_poll_command()`-style function (see project history / previous SP1-11 drafts) — but this is **not** part of the current confirmed architecture.
+
