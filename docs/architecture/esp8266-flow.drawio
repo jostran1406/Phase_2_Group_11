@@ -1,0 +1,110 @@
+<mxfile host="app.diagrams.net" agent="Claude">
+  <diagram name="ESP8266 Flow v3" id="flow-v3">
+    <mxGraphModel dx="1571" dy="901" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="650" pageHeight="1000" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" parent="1" style="text;html=1;fontSize=15;fontStyle=1;align=center;" value="ESP8266 FLOW DIAGRAM (v3 - đọc cảm biến trực tiếp)" vertex="1">
+          <mxGeometry height="30" width="500" x="60" y="10" as="geometry" />
+        </mxCell>
+        <mxCell id="start" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;fontSize=13;" value="START" vertex="1">
+          <mxGeometry height="40" width="180" x="150" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="init_esp" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;" value="Initialize ESP8266&#xa;(SDK, GPIO, Timer, etc.)" vertex="1">
+          <mxGeometry height="50" width="220" x="130" y="120" as="geometry" />
+        </mxCell>
+        <mxCell id="init_sensor" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;" value="Initialize Sensor Interface&#xa;(GPIO / I2C / OneWire)" vertex="1">
+          <mxGeometry height="45" width="220" x="130" y="190" as="geometry" />
+        </mxCell>
+        <mxCell id="connect_wifi" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;" value="Connect to WiFi" vertex="1">
+          <mxGeometry height="40" width="220" x="130" y="250" as="geometry" />
+        </mxCell>
+        <mxCell id="wifi_dec" parent="1" style="rhombus;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=11;" value="WiFi connected?" vertex="1">
+          <mxGeometry height="70" width="200" x="140" y="310" as="geometry" />
+        </mxCell>
+        <mxCell id="retry_wifi" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=11;" value="Retry Connection&#xa;(Wait &amp; Reconnect)" vertex="1">
+          <mxGeometry height="40" width="180" x="420" y="325" as="geometry" />
+        </mxCell>
+        <mxCell id="read_sensor" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;" value="Read sensors directly via&#xa;esp_read_temperature() / esp_read_humidity() / esp_read_light()" vertex="1">
+          <mxGeometry height="55" width="280" x="100" y="410" as="geometry" />
+        </mxCell>
+        <mxCell id="validate" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=11;" value="Validate / Store to Buffer" vertex="1">
+          <mxGeometry height="45" width="220" x="130" y="480" as="geometry" />
+        </mxCell>
+        <mxCell id="connect_backend" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;" value="Connect to Backend&#xa;(MQTT / HTTP)" vertex="1">
+          <mxGeometry height="45" width="220" x="130" y="545" as="geometry" />
+        </mxCell>
+        <mxCell id="build_send" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=10;" value="Build JSON &amp; send via&#xa;esp_send_temperature() / esp_send_humidity() / esp_send_light()" vertex="1">
+          <mxGeometry height="55" width="280" x="100" y="610" as="geometry" />
+        </mxCell>
+        <mxCell id="tx_dec" parent="1" style="rhombus;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=11;" value="Transmission&#xa;successful?" vertex="1">
+          <mxGeometry height="70" width="200" x="140" y="685" as="geometry" />
+        </mxCell>
+        <mxCell id="retry_tx" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=11;" value="Retry / Error Handling&#xa;(Queue / Reconnect)" vertex="1">
+          <mxGeometry height="40" width="180" x="420" y="700" as="geometry" />
+        </mxCell>
+        <mxCell id="wait_next" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;" value="Wait for next reading cycle" vertex="1">
+          <mxGeometry height="40" width="220" x="130" y="790" as="geometry" />
+        </mxCell>
+        <mxCell id="e1" edge="1" parent="1" source="start" style="endArrow=block;html=1;" target="init_esp">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e2" edge="1" parent="1" source="init_esp" style="endArrow=block;html=1;" target="init_sensor">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e3" edge="1" parent="1" source="init_sensor" style="endArrow=block;html=1;" target="connect_wifi">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e4" edge="1" parent="1" source="connect_wifi" style="endArrow=block;html=1;" target="wifi_dec">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e5" edge="1" parent="1" source="wifi_dec" style="endArrow=block;html=1;fontColor=#FF0000;fontSize=10;" target="retry_wifi" value="No">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e6" edge="1" parent="1" source="retry_wifi" style="endArrow=block;html=1;rounded=1;" target="connect_wifi">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="600" y="270" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e7" edge="1" parent="1" source="wifi_dec" style="endArrow=block;html=1;fontColor=#009900;fontSize=10;" target="read_sensor" value="Yes">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e8" edge="1" parent="1" source="read_sensor" style="endArrow=block;html=1;" target="validate">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e9" edge="1" parent="1" source="validate" style="endArrow=block;html=1;" target="connect_backend">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e10" edge="1" parent="1" source="connect_backend" style="endArrow=block;html=1;" target="build_send">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e11" edge="1" parent="1" source="build_send" style="endArrow=block;html=1;" target="tx_dec">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e12" edge="1" parent="1" source="tx_dec" style="endArrow=block;html=1;fontColor=#FF0000;fontSize=10;" target="retry_tx" value="No">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e13" edge="1" parent="1" source="retry_tx" style="endArrow=block;html=1;rounded=1;" target="build_send">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="600" y="637" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e14" edge="1" parent="1" source="tx_dec" style="endArrow=block;html=1;fontColor=#009900;fontSize=10;" target="wait_next" value="Yes">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e15" edge="1" parent="1" source="wait_next" style="endArrow=block;html=1;rounded=1;" target="read_sensor">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="60" y="810" />
+              <mxPoint x="60" y="437" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

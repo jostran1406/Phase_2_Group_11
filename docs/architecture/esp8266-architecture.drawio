@@ -1,0 +1,70 @@
+<mxfile host="app.diagrams.net" agent="Claude">
+  <diagram name="ESP8266 Architecture v3" id="arch-v3">
+    <mxGraphModel dx="1414" dy="811" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1400" pageHeight="640" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" parent="1" style="text;html=1;fontSize=15;fontStyle=1;align=center;" value="ESP8266 ARCHITECTURE DIAGRAM (v3 - ESP8266 là node thu thập dữ liệu độc lập, bỏ UART STM32)" vertex="1">
+          <mxGeometry height="30" width="1000" x="150" y="10" as="geometry" />
+        </mxCell>
+        <mxCell id="sensors" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;verticalAlign=top;fontStyle=1;fontSize=12;spacing=8;" value="Sensors&#xa;• Temperature&#xa;• Humidity&#xa;• Light&#xa;• ..." vertex="1">
+          <mxGeometry height="150" width="150" y="120" as="geometry" />
+        </mxCell>
+        <mxCell id="esp_outer" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;verticalAlign=top;fontStyle=1;fontSize=14;" value="ESP8266 (Data Collection Node)" vertex="1">
+          <mxGeometry height="340" width="560" x="230" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="esp_inner" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#6c8ebf;dashed=1;" value="" vertex="1">
+          <mxGeometry height="270" width="500" x="260" y="100" as="geometry" />
+        </mxCell>
+        <mxCell id="sensor_if" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;fontStyle=1;" value="Sensor Interface&#xa;(GPIO / I2C / OneWire)" vertex="1">
+          <mxGeometry height="60" width="120" x="280" y="130" as="geometry" />
+        </mxCell>
+        <mxCell id="read_fns" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;align=center;" value="Read Functions&#xa;esp_read_temperature()&#xa;esp_read_humidity()&#xa;esp_read_light()" vertex="1">
+          <mxGeometry height="95" width="190" x="430" y="115" as="geometry" />
+        </mxCell>
+        <mxCell id="wifi_mod" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=12;fontStyle=1;" value="WiFi&#xa;Module" vertex="1">
+          <mxGeometry height="60" width="100" x="650" y="130" as="geometry" />
+        </mxCell>
+        <mxCell id="buffer" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=12;fontStyle=1;" value="Buffer&#xa;(Queue)" vertex="1">
+          <mxGeometry height="60" width="190" x="430" y="250" as="geometry" />
+        </mxCell>
+        <mxCell id="send_fns" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=11;align=center;" value="Send Functions&#xa;esp_build_payload() (JSON)&#xa;esp_send_temperature()&#xa;esp_send_humidity()&#xa;esp_send_light()" vertex="1">
+          <mxGeometry height="110" width="100" x="650" y="230" as="geometry" />
+        </mxCell>
+        <mxCell id="backend" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=13;fontStyle=1;" value="Backend&#xa;Server" vertex="1">
+          <mxGeometry height="90" width="150" x="900" y="170" as="geometry" />
+        </mxCell>
+        <mxCell id="frontend" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=13;fontStyle=1;" value="Frontend&#xa;(Dashboard)" vertex="1">
+          <mxGeometry height="90" width="150" x="1110" y="90" as="geometry" />
+        </mxCell>
+        <mxCell id="database" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=13;fontStyle=1;" value="Database&#xa;(MySQL)" vertex="1">
+          <mxGeometry height="90" width="150" x="1110" y="260" as="geometry" />
+        </mxCell>
+        <mxCell id="e_sensor_if" edge="1" parent="1" source="sensors" style="endArrow=block;html=1;" target="sensor_if">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_if_read" edge="1" parent="1" source="sensor_if" style="endArrow=block;html=1;" target="read_fns">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_read_buf" edge="1" parent="1" source="read_fns" style="endArrow=block;html=1;" target="buffer">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_wifi_send" edge="1" parent="1" source="wifi_mod" style="endArrow=block;html=1;" target="send_fns">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_buf_send" edge="1" parent="1" source="buffer" style="endArrow=block;html=1;" target="send_fns">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_send_backend" edge="1" parent="1" source="send_fns" style="endArrow=block;dashed=1;html=1;fontColor=#0000FF;fontSize=10;" target="backend" value="WiFi">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_backend_front" edge="1" parent="1" source="backend" style="endArrow=block;html=1;" target="frontend">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_backend_db" edge="1" parent="1" source="backend" style="endArrow=block;dashed=1;html=1;" target="database">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
