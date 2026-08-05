@@ -16,8 +16,6 @@ Base URL:
 http://server-ip/api
 ```
 
----
-
 ## 2. Main Functions
 
 The API supports:
@@ -27,8 +25,6 @@ The API supports:
 - Device Control
 - Alert Management
 - System Configuration
-
----
 
 ## 3. Response Format
 
