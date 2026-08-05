@@ -46,9 +46,7 @@ Open `esp_network.h`:
 #define DEVICE_ID       "NODE_01"
 ```
 
-```cpp
-static const long GMT_OFFSET_SEC = 7 * 3600;
-```
+
 
 ## 5. Build & Upload
 1. Plug the ESP8266 in via USB, select **Tools → Port**
