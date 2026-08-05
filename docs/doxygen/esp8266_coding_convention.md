@@ -9,7 +9,7 @@
 | Build a data payload | `esp_build_*` | `esp_build_payload()` |
 | Initialize a module | `esp_<module>_init` | `esp_sensors_init()`, `esp_network_init()`, `esp_time_init()` |
 
-## 2. Sensor Data Set (matches the Backend `SENSOR_DATA` schema exactly)
+## 2. Sensor Data Set 
 | Sensor | Field | Unit |
 |---|---|---|
 | DHT (temperature) | `SensorData.temperature` | °C |
