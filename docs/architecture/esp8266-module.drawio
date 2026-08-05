@@ -1,0 +1,70 @@
+<mxfile host="app.diagrams.net" agent="Claude">
+  <diagram name="ESP8266 Module v3" id="module-v3">
+    <mxGraphModel dx="1414" dy="811" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1400" pageHeight="720" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" parent="1" style="text;html=1;fontSize=16;fontStyle=1;align=center;" value="ESP8266 MODULE DIAGRAM&amp;nbsp;" vertex="1">
+          <mxGeometry height="30" width="800" x="300" y="10" as="geometry" />
+        </mxCell>
+        <mxCell id="firmware_box" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#6c8ebf;dashed=1;verticalAlign=top;fontStyle=1;fontSize=14;" value="ESP8266 Firmware" vertex="1">
+          <mxGeometry height="500" width="1180" x="20" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="m1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;align=left;spacing=8;fontSize=11;" value="1. Sensor Interface Module&#xa;• GPIO / I2C / OneWire Init&#xa;• Read Raw Sensor Data&#xa;• Timing / Sampling Control" vertex="1">
+          <mxGeometry height="150" width="260" x="50" y="100" as="geometry" />
+        </mxCell>
+        <mxCell id="m2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;align=left;spacing=8;fontSize=11;" value="2. Read Module (esp_read_*)&#xa;• esp_read_temperature()&#xa;• esp_read_humidity()&#xa;• esp_read_light()&#xa;• Validate &amp; Store to Buffer" vertex="1">
+          <mxGeometry height="150" width="260" x="330" y="100" as="geometry" />
+        </mxCell>
+        <mxCell id="m3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;align=left;spacing=8;fontSize=11;" value="3. WiFi Module&#xa;• Connect to WiFi&#xa;• Monitor Connection&#xa;• Reconnect&#xa;• WiFi Status" vertex="1">
+          <mxGeometry height="150" width="260" x="610" y="100" as="geometry" />
+        </mxCell>
+        <mxCell id="m4" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;align=left;spacing=8;fontSize=11;" value="4. Send Module (esp_send_*)&#xa;• esp_build_payload() (JSON)&#xa;• esp_send_temperature()&#xa;• esp_send_humidity()&#xa;• esp_send_light()&#xa;• Handle Response" vertex="1">
+          <mxGeometry height="150" width="260" x="890" y="100" as="geometry" />
+        </mxCell>
+        <mxCell id="m5" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;align=left;spacing=8;fontSize=11;" value="5. Error Handling Module&#xa;• Sensor Read Error Handling&#xa;• WiFi Error Handling&#xa;• MQTT/HTTP Error Handling&#xa;• Timeout Handling&#xa;• Log &amp; Report" vertex="1">
+          <mxGeometry height="150" width="260" x="330" y="300" as="geometry" />
+        </mxCell>
+        <mxCell id="m6" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;align=left;spacing=8;fontSize=11;" value="6. System Management Module&#xa;• Task Scheduling&#xa;• Buffer Management&#xa;• Watchdog&#xa;• System Status" vertex="1">
+          <mxGeometry height="150" width="260" x="610" y="300" as="geometry" />
+        </mxCell>
+        <mxCell id="ext" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;align=left;spacing=8;fontSize=11;" value="External Interfaces&#xa;• Sensors (GPIO / I2C)&#xa;• WiFi AP&#xa;• Backend Server" vertex="1">
+          <mxGeometry height="150" width="150" x="1230" y="200" as="geometry" />
+        </mxCell>
+        <mxCell id="e1" edge="1" parent="1" source="m1" style="endArrow=block;html=1;" target="m2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e2" edge="1" parent="1" source="m2" style="endArrow=block;html=1;" target="m3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e3" edge="1" parent="1" source="m3" style="endArrow=block;html=1;" target="m4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e4" edge="1" parent="1" source="m2" style="endArrow=none;html=1;" target="m5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e5" edge="1" parent="1" source="m3" style="endArrow=none;html=1;" target="m6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e6" edge="1" parent="1" source="m1" style="endArrow=block;startArrow=block;html=1;" target="ext">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="180" y="50" />
+              <mxPoint x="1305" y="50" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e7" edge="1" parent="1" source="m4" style="endArrow=block;startArrow=block;html=1;" target="ext">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e8" edge="1" parent="1" source="m6" style="endArrow=block;startArrow=block;html=1;" target="ext">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1200" y="375" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
