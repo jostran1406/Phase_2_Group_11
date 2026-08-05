@@ -62,23 +62,3 @@ Open `esp_network.h`:
    [esp_network] Send OK (HTTP 200)
    ```
 
-## 6. Troubleshooting
-| Issue | Likely cause |
-|---|---|
-| `esp_read_temperature()`/`humidity()` returns NAN repeatedly | Wrong wiring, or wrong `DHT_TYPE` (DHT11 vs DHT22) |
-| WiFi never connects | Wrong SSID/password, or not on 2.4GHz |
-| HTTP send always FAILED | Wrong `BACKEND_URL`, backend not running, or not on the same network |
-| Timestamp sends raw `millis()` instead of date string | NTP not synced (check internet access to `pool.ntp.org`) |
-
-## 7. (Optional) PlatformIO
-```ini
-[env:nodemcuv2]
-platform = espressif8266
-board = nodemcuv2
-framework = arduino
-lib_deps =
-    adafruit/DHT sensor library
-    adafruit/Adafruit Unified Sensor
-    bblanchon/ArduinoJson
-```
-Run: `pio run -t upload`
