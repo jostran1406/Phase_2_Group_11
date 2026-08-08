@@ -2,7 +2,7 @@
 
 ## 1. Overview
 
-The Backend API provides communication between the Frontend Dashboard, ESP8266 monitoring nodes, and the backend server. All APIs use REST architecture and JSON data format.
+The Backend API provides communication between the Frontend Dashboard, ESP8266 gateway modules, and the backend server. Sensor data is acquired by STM32 controllers and transmitted through ESP8266 gateways.
 
 ## 2. Authentication API
 
@@ -133,13 +133,12 @@ Update threshold configuration.
 
 ### POST /api/sensor/upload
 
-Used by ESP8266 monitoring nodes to upload environmental data.
-
+Used by ESP8266 gateway modules to upload sensor data collected from STM32 monitoring nodes.
 #### Request
 
 ```json
 {
-  "device_id": "NODE_01",
+  "node_id": "NODE_01",
   "temperature": 28.5,
   "humidity": 70.2,
   "light": 450,

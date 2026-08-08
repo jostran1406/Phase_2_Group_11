@@ -1,15 +1,20 @@
 # Backend Architecture
 
 ## 1. Overview
-The Backend is responsible for receiving, processing, storing, and providing environmental monitoring data collected from IoT devices deployed in the laboratory. It acts as the central communication layer between ESP8266 monitoring nodes, STM32 control nodes, the database, and the web-based dashboard.
 
-The backend system receives sensor data including temperature, humidity, and light intensity from ESP8266 through network communication protocols. After validating and processing the received data, the system stores it in a MySQL database and provides REST APIs for the frontend dashboard to retrieve real-time and historical information.
+The Backend is responsible for receiving, processing, storing, and providing environmental monitoring data collected from IoT devices deployed in the laboratory.
+
+Sensor data is acquired by the STM32 microcontroller from environmental sensors and transmitted to the ESP8266 gateway through UART communication. The ESP8266 then forwards the collected data to the backend server using MQTT/HTTP protocols.
+
+After validating and processing the received data, the backend stores it in a MySQL database and provides REST APIs for the frontend dashboard to retrieve real-time and historical information.
 
 In addition, the backend manages alert generation, device status monitoring, threshold configuration, and data access services to support automatic control and user interaction. The architecture is designed to be scalable, maintainable, and suitable for future expansion of additional sensors and monitoring nodes.
 
-## 2. Backend Architecture
-```mermaid
+---
 
+## 2. Backend Architecture
+
+```mermaid
 graph LR
 
 ESP8266 --> Backend
@@ -21,15 +26,14 @@ REST_API --> Controller
 Controller --> Service
 
 Service --> Database
-
 ```
 
+---
+
 ## 3. MVC
+
 ```mermaid
-
 graph TD
-
-Routes
 
 Routes --> Controller
 
@@ -38,14 +42,18 @@ Controller --> Service
 Service --> Model
 
 Model --> MySQL
-
 ```
 
+---
+
 ## 4. Database Selection
+
 ### Database
+
 MySQL
 
 ### Reasons
+
 - Open Source
 - Stable
 - Relational Database
@@ -53,68 +61,49 @@ MySQL
 - Easy Backup and Recovery
 - Good NodeJS Integration
 
+---
+
 ## 5. Database Schema
+
 ```mermaid
 erDiagram
 
 USER {
-
 INT id
-
 VARCHAR username
-
 VARCHAR password
-
 }
 
 SENSOR_DATA {
-
 INT id
-
 FLOAT temperature
-
 FLOAT humidity
-
 FLOAT light
-
 DATETIME timestamp
-
 }
 
 DEVICE {
-
 INT id
-
 VARCHAR name
-
 BOOLEAN status
-
 }
 
 ALERT {
-
 INT id
-
 VARCHAR type
-
 VARCHAR message
-
 DATETIME time
-
 }
 
 SETTING {
-
 INT id
-
 FLOAT temperature_threshold
-
 FLOAT humidity_threshold
-
 FLOAT light_threshold
-
 }
 ```
+
+---
 
 ## 5.1 Database Relationships
 
@@ -137,32 +126,47 @@ DEVICE ||--o{ SENSOR_DATA : produces
 - System Settings define threshold values used to trigger alerts.
 - Users receive and monitor alert notifications through the dashboard.
 
+---
+
 ## 6. Data Storage Flow
+
 ```mermaid
 flowchart LR
-Sensors --> ESP8266
+
+Sensors --> STM32
+
+STM32 --> ESP8266
+
 ESP8266 --> Backend
+
 Backend --> Validation
+
 Validation --> MySQL
+
 MySQL --> REST_API
+
 REST_API --> Frontend
 ```
 
+---
+
 ## 6.1 Data Storage Strategy
 
-Sensor data is collected by ESP8266 monitoring nodes and transmitted directly to the backend server using HTTP or MQTT protocols.
+Sensor data collected from environmental sensors is processed by STM32 and transmitted to ESP8266 through UART communication. The ESP8266 forwards the sensor data to the backend server using MQTT/HTTP protocols.
 
-The backend validates all incoming data before storing it in the MySQL database. Environmental parameters including temperature, humidity, and light intensity are periodically recorded in the SENSOR_DATA table for real-time monitoring and historical analysis.
+The backend validates incoming data before storing it in the MySQL database.
 
-Device status information is stored in the DEVICE table to support remote monitoring and control operations.
+Environmental data including temperature, humidity, and light intensity is recorded periodically to support real-time monitoring and historical analysis.
 
-Threshold configurations are stored in the SETTING table and are used by the backend to evaluate environmental conditions. When sensor values exceed predefined thresholds, the system automatically generates alert records and stores them in the ALERT table.
+Alert events are stored separately to maintain a complete event history and support notification services. Device status changes are also logged to assist system monitoring and troubleshooting.
 
-This storage strategy ensures data consistency, efficient retrieval, scalability, and long-term historical data management for dashboard visualization and reporting.
+The storage design ensures data consistency, scalability, and efficient retrieval for dashboard visualization and reporting.
+
+---
 
 ## 7. REST API Flow
-```mermaid
 
+```mermaid
 sequenceDiagram
 
 User->>Frontend: Login
@@ -176,109 +180,116 @@ Database-->>Backend: Result
 Backend-->>Frontend: JSON
 
 Frontend-->>User: Display
-
 ```
+
+---
 
 ## 8. Component Relationship
-```mermaid
 
+```mermaid
 graph LR
 
-Sensor
+Sensor --> STM32
 
--->
+STM32 --> ESP8266
 
-ESP8266
+ESP8266 --> Backend
 
--->
+Backend --> Database
 
-Backend
+Backend --> Frontend
 
-Backend
+Frontend --> User
 
--->
+STM32 --> Relay
 
-STM32
+Relay --> Fan
 
-Backend
+Relay --> Light
 
--->
-
-Database
-
-Backend
-
--->
-
-Frontend
-
-Frontend
-
--->
-
-User
-
-STM32
-
--->
-
-Relay
-
-Relay
-
--->
-
-Fan
-
-Relay
-
--->
-
-Light
-
-Relay
-
--->
-
-Buzzer
-
+Relay --> Buzzer
 ```
 
+---
+
 ## 9. Communication Protocol
+
 ```mermaid
 graph LR
 
-Sensor -- GPIO/I2C --> ESP8266
+Sensor -- GPIO/I2C --> STM32
 
-User -- HTTPS --> Frontend
-
-Frontend -- REST API --> Backend
+STM32 -- UART --> ESP8266
 
 ESP8266 -- MQTT/HTTP --> Backend
 
-Backend -- MQTT/HTTP --> ESP8266
-
 Backend -- SQL --> MySQL
 
-Backend -- REST API --> STM32
+Frontend -- REST API --> Backend
+
+User -- HTTPS --> Frontend
 
 STM32 -- GPIO --> Relay
 ```
 
-## Data Storage Strategy
+---
 
-The backend stores all sensor measurements in a MySQL database.
+## 10. API Design
 
-Sensor data includes:
+### Authentication API
 
-- Temperature
-- Humidity
-- Light Intensity
-- Timestamp
+| Method | Endpoint | Description |
+|----------|----------|----------|
+| POST | /api/login | User login |
 
-Each ESP8266 node periodically sends data to the backend using HTTP or MQTT.
+### Sensor API
 
-The backend validates incoming data before inserting records into the SENSOR_DATA table.
+| Method | Endpoint | Description |
+|----------|----------|----------|
+| GET | /api/sensors/latest | Get latest sensor data |
+| GET | /api/sensors/history | Get sensor history |
 
-Alert events and device status changes are stored separately to support monitoring, reporting, and system diagnostics.
+### Device API
 
+| Method | Endpoint | Description |
+|----------|----------|----------|
+| POST | /api/device/control | Control devices |
+
+### Alert API
+
+| Method | Endpoint | Description |
+|----------|----------|----------|
+| GET | /api/alerts | Get alert history |
+```
+
+## 11. JSON Data Format
+
+### Sensor Data Payload
+
+```json
+{
+  "node_id": 1,
+  "temperature": 28.5,
+  "humidity": 65.2,
+  "light": 420,
+  "timestamp": "2026-08-09T08:30:00Z"
+}
+```
+
+### Device Control Payload
+
+```json
+{
+  "device": "fan",
+  "status": true
+}
+```
+
+### Login Request
+
+```json
+{
+  "username": "admin",
+  "password": "123456"
+}
+```

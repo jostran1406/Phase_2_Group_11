@@ -8,8 +8,7 @@ All APIs use:
 
 - REST Architecture
 - JSON Data Format
-- HTTP Protocol
-
+- HTTP/HTTPS Protocol
 Base URL:
 
 ```text

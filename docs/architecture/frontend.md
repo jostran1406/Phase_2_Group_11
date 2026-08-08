@@ -1,7 +1,7 @@
 # Frontend Architecture
 
 ## 1. Overview
-The Frontend is a web-based monitoring dashboard developed for the IoT Laboratory Monitoring System. The dashboard provides real-time visualization of temperature, humidity and light intensity data collected by ESP8266-based monitoring nodes deployed throughout the laboratory.
+The Frontend is a web-based monitoring dashboard developed for the IoT Laboratory Monitoring System. The dashboard provides real-time visualization of temperature, humidity and light intensity data collected by STM32-based monitoring nodes and transmitted through ESP8266 gateways deployed throughout the laboratory.
 
 The dashboard provides real-time visualization of temperature, humidity, and light intensity measurements, as well as device status information and alert notifications. Users can also review historical data, monitor system health, and configure operational thresholds for automatic control functions.
 
@@ -152,29 +152,27 @@ G --> H
 
 ## 8. API Integration
 
-The frontend communicates with the backend through REST APIs. All requests and responses use JSON format.
-
-### API Usage
-
-| Function | Endpoint | Method |
-|-----------|-----------|---------|
-| User Login | /api/login | POST |
-| Get Latest Sensor Data | /api/sensor/latest | GET |
-| Get Sensor History | /api/sensor/history | GET |
-| Device Control | /api/device/control | POST |
-| Get Alert History | /api/alerts | GET |
-| Update Threshold Setting | /api/settings | POST |
-
-### Communication Flow
-
 ```mermaid
-sequenceDiagram
+graph LR
 
-User->>Frontend: Request Data
+Frontend --> REST_API
 
-Frontend->>Backend: REST API Request
+REST_API --> Backend
 
-Backend-->>Frontend: JSON Response
+Backend --> MySQL
+```
 
-Frontend-->>User: Display Data
+### Description
+
+The frontend communicates with the backend through REST APIs using HTTP/HTTPS protocols.
+
+Main API functions include:
+
+- User Authentication
+- Sensor Data Retrieval
+- Device Control
+- Alert History Retrieval
+- Threshold Configuration
+
+All API responses are returned in JSON format and displayed through dashboard components.
 ```
