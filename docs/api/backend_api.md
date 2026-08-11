@@ -86,6 +86,7 @@ Control laboratory devices.
   "status": "success"
 }
 ```
+The frontend dashboard sends control requests to the backend server using this API.
 
 ## 6. Alert API
 
@@ -154,3 +155,36 @@ Used by ESP8266 gateway modules to upload sensor data collected from STM32 monit
   "message": "Data received"
 }
 ```
+
+## 9. Device Command Payload
+
+### Backend to ESP8266
+
+```json
+{
+  "command": "control",
+  "device": "fan",
+  "status": true
+}
+```
+
+### Description
+
+This payload is used by the backend server to send control commands to ESP8266 gateways. The ESP8266 forwards the command to STM32, which activates or deactivates the corresponding relay module.
+
+### Command Flow
+
+```mermaid
+flowchart LR
+
+User --> Frontend
+
+Frontend --> Backend
+
+Backend --> ESP8266
+
+ESP8266 --> STM32
+
+STM32 --> Relay
+```
+
