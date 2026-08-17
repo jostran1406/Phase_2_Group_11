@@ -63,8 +63,31 @@ Returns historical sensor records.
   }
 ]
 ```
+## 5. Dashboard API
 
-## 5. Device Control API
+### GET /api/dashboard
+
+Returns summarized information for the dashboard view.
+
+#### Response
+
+```json
+{
+  "temperature": 28.5,
+  "humidity": 70.2,
+  "light": 450,
+
+  "fan_status": true,
+  "light_status": false,
+  "buzzer_status": false,
+
+  "alert_count": 3,
+
+  "last_update": "2026-08-05 10:30:00"
+}
+```
+
+## 6. Device Control API
 
 ### POST /api/device/control
 
@@ -88,7 +111,7 @@ Control laboratory devices.
 ```
 The frontend dashboard sends control requests to the backend server using this API.
 
-## 6. Alert API
+## 7. Alert API
 
 ### GET /api/alerts
 
@@ -106,7 +129,7 @@ Returns alert history.
 ]
 ```
 
-## 7. Setting API
+## 8. Setting API
 
 ### POST /api/settings
 
@@ -130,7 +153,7 @@ Update threshold configuration.
 }
 ```
 
-## 8. ESP8266 Sensor Upload API
+## 9. ESP8266 Sensor Upload API
 
 ### POST /api/sensor/upload
 
@@ -156,7 +179,7 @@ Used by ESP8266 gateway modules to upload sensor data collected from STM32 monit
 }
 ```
 
-## 9. Device Command Payload
+## 10. Device Command Payload
 
 ### Backend to ESP8266
 

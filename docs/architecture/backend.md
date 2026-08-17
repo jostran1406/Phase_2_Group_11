@@ -184,6 +184,28 @@ Frontend-->>User: Display
 
 ---
 
+## 7.1 Dashboard Data Flow
+
+```mermaid
+flowchart LR
+
+Dashboard --> Dashboard_API
+
+Dashboard_API --> Backend
+
+Backend --> MySQL
+
+MySQL --> Backend
+
+Backend --> Dashboard_API
+
+Dashboard_API --> Dashboard
+```
+
+The dashboard retrieves summarized real-time information through a dedicated Dashboard API. The backend collects the latest sensor data, device status, and alert information from the database and returns a single aggregated response for dashboard visualization.
+
+---
+
 ## 8. Component Relationship
 
 ```mermaid
@@ -221,7 +243,7 @@ Sensor -- GPIO/I2C --> STM32
 
 STM32 -- UART --> ESP8266
 
-ESP8266 -- MQTT/HTTP --> Backend
+ESP8266 -- HTTP --> Backend
 
 Backend -- SQL --> MySQL
 

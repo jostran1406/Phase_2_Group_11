@@ -13,11 +13,13 @@ graph LR
 
 User --> Dashboard
 
-Dashboard --> Components
+Dashboard --> Dashboard_API
 
-Components --> API_Service
+Dashboard --> History_API
 
-API_Service --> Backend
+Dashboard_API --> Backend
+
+History_API --> Backend
 
 ```
 
