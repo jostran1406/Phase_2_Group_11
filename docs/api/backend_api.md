@@ -6,7 +6,38 @@ The Backend API provides communication between the Frontend Dashboard, ESP8266 g
 
 ## 2. Authentication API
 
-### POST /api/login
+### POST /api/auth/register
+
+Register a new user account.
+
+#### Request
+
+```json
+{
+  "username": "kien",
+  "password": "123456"
+}
+```
+
+#### Response
+
+```json
+{
+  "status": "success",
+  "message": "User registered successfully"
+}
+```
+
+#### Error Response
+
+```json
+{
+  "status": "error",
+  "message": "Username already exists"
+}
+```
+
+### POST /api/auth/login
 
 User authentication.
 
@@ -24,11 +55,40 @@ User authentication.
 ```json
 {
   "status": "success",
-  "token": "jwt_token"
+  "message": "Login successful"
 }
 ```
 
-## 3. Latest Sensor Data API
+#### Error Response
+
+```json
+{
+  "status": "error",
+  "message": "Invalid username or password"
+}
+```
+
+## 3. Dashboard API
+
+### GET /api/dashboard
+
+Returns summarized information required by the Dashboard page.
+
+#### Response
+
+```json
+{
+  "temperature": 28.5,
+  "humidity": 70.2,
+  "light": 450,
+  "fan_status": false,
+  "light_status": false,
+  "buzzer_status": false,
+  "alert_count": 1,
+  "last_update": "2026-08-05 10:30:00"
+}
+```
+## 4. Latest Sensor Data API
 
 ### GET /api/sensor/latest
 
@@ -45,7 +105,7 @@ Returns the most recent sensor data.
 }
 ```
 
-## 4. Sensor History API
+## 5. Sensor History API
 
 ### GET /api/sensor/history
 
@@ -62,29 +122,6 @@ Returns historical sensor records.
     "timestamp": "2026-08-05 10:30:00"
   }
 ]
-```
-## 5. Dashboard API
-
-### GET /api/dashboard
-
-Returns summarized information for the dashboard view.
-
-#### Response
-
-```json
-{
-  "temperature": 28.5,
-  "humidity": 70.2,
-  "light": 450,
-
-  "fan_status": true,
-  "light_status": false,
-  "buzzer_status": false,
-
-  "alert_count": 3,
-
-  "last_update": "2026-08-05 10:30:00"
-}
 ```
 
 ## 6. Device Control API
@@ -109,6 +146,7 @@ Control laboratory devices.
   "status": "success"
 }
 ```
+
 The frontend dashboard sends control requests to the backend server using this API.
 
 ## 7. Alert API
@@ -158,6 +196,7 @@ Update threshold configuration.
 ### POST /api/sensor/upload
 
 Used by ESP8266 gateway modules to upload sensor data collected from STM32 monitoring nodes.
+
 #### Request
 
 ```json
@@ -181,7 +220,7 @@ Used by ESP8266 gateway modules to upload sensor data collected from STM32 monit
 
 ## 10. Device Command Payload
 
-### Backend to ESP8266
+Backend to ESP8266
 
 ```json
 {
@@ -198,6 +237,7 @@ This payload is used by the backend server to send control commands to ESP8266 g
 ### Command Flow
 
 ```mermaid
+
 flowchart LR
 
 User --> Frontend
@@ -209,5 +249,5 @@ Backend --> ESP8266
 ESP8266 --> STM32
 
 STM32 --> Relay
-```
 
+```
