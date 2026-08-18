@@ -1,4 +1,4 @@
-const API_BASE_URL = "http://localhost:5000/api"
+const API_BASE_URL = "http://localhost:3000/api"
 
 // ================================
 // Dashboard
@@ -36,7 +36,6 @@ export async function getSensorHistory() {
 
 // ================================
 // Alerts
-// Lấy lịch sử cảnh báo
 // ================================
 export async function getAlerts() {
   const response = await fetch(
@@ -98,11 +97,13 @@ export async function updateSettings(settings) {
 
 
 // ================================
-// Login
+// Authentication
 // ================================
-export async function login(username, password) {
+
+// Register
+export async function register(username, password) {
   const response = await fetch(
-    `${API_BASE_URL}/login`,
+    `${API_BASE_URL}/auth/register`,
     {
       method: "POST",
       headers: {
@@ -115,9 +116,35 @@ export async function login(username, password) {
     }
   )
 
-  if (!response.ok) {
-    throw new Error("Login failed")
-  }
+  const data = await response.json()
 
-  return response.json()
+  return {
+    httpStatus: response.status,
+    ...data,
+  }
+}
+
+
+// Login
+export async function login(username, password) {
+  const response = await fetch(
+    `${API_BASE_URL}/auth/login`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        username,
+        password,
+      }),
+    }
+  )
+
+  const data = await response.json()
+
+  return {
+    httpStatus: response.status,
+    ...data,
+  }
 }
