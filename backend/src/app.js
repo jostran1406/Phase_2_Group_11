@@ -1,3 +1,4 @@
+const authRoutes = require("./routes/authRoutes");
 const dashboardRoutes = require("./routes/dashboardRoutes");
 const deviceRoutes = require("./routes/deviceRoutes");
 const alertRoutes = require("./routes/alertRoutes");
@@ -16,6 +17,7 @@ app.use("/api/settings", settingsRoutes);
 app.use("/api/alerts", alertRoutes);
 app.use("/api/device", deviceRoutes);
 app.use("/api/dashboard", dashboardRoutes);
+app.use("/api/auth", authRoutes);
 
 app.get("/", (req, res) => {
     res.json({
