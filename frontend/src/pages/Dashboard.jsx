@@ -1,16 +1,40 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import SensorCard from "../components/SensorCard"
+import { getLatestSensorData } from "../services/api"
 
 function Dashboard() {
-  const [temperature, setTemperature] = useState(28.5)
-  const [humidity, setHumidity] = useState(65)
-  const [light, setLight] = useState(450)
+  const [sensorData, setSensorData] = useState({
+    temperature: null,
+    humidity: null,
+    light: null,
+  })
 
-  const updateSensorData = () => {
-    setTemperature((Math.random() * 5 + 26).toFixed(1))
-    setHumidity(Math.floor(Math.random() * 20 + 55))
-    setLight(Math.floor(Math.random() * 300 + 300))
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(null)
+
+  const loadSensorData = async () => {
+    try {
+      setLoading(true)
+      setError(null)
+
+      const data = await getLatestSensorData()
+
+      setSensorData({
+        temperature: data.temperature,
+        humidity: data.humidity,
+        light: data.light,
+      })
+    } catch (err) {
+      console.error("Failed to load sensor data:", err)
+      setError("Unable to load sensor data")
+    } finally {
+      setLoading(false)
+    }
   }
+
+  useEffect(() => {
+    loadSensorData()
+  }, [])
 
   return (
     <div className="dashboard">
@@ -37,33 +61,40 @@ function Dashboard() {
 
           <button
             className="refresh-button"
-            onClick={updateSensorData}
+            onClick={loadSensorData}
+            disabled={loading}
           >
-            ↻ Refresh
+            ↻ {loading ? "Loading..." : "Refresh"}
           </button>
         </div>
+
+        {error && (
+          <div className="error-message">
+            {error}
+          </div>
+        )}
 
         <div className="sensor-grid">
 
           <SensorCard
             title="Temperature"
-            value={temperature}
+            value={sensorData.temperature ?? "--"}
             unit="°C"
-             icon="🌡️"
+            icon="🌡️"
           />
 
           <SensorCard
             title="Humidity"
-            value={humidity}
+            value={sensorData.humidity ?? "--"}
             unit="%"
-             icon="💧"
+            icon="💧"
           />
 
           <SensorCard
             title="Light Intensity"
-            value={light}
+            value={sensorData.light ?? "--"}
             unit="lux"
-              icon="☀️"
+            icon="☀️"
           />
 
         </div>
@@ -74,29 +105,41 @@ function Dashboard() {
 
         <div className="summary-card">
           <span className="summary-icon">🌡️</span>
+
           <div>
             <strong>Temperature</strong>
-            <p>Within normal range</p>
+            <p>Current sensor reading</p>
           </div>
-          <span className="normal-badge">Normal</span>
+
+          <span className="normal-badge">
+            Normal
+          </span>
         </div>
 
         <div className="summary-card">
           <span className="summary-icon">💧</span>
+
           <div>
             <strong>Humidity</strong>
-            <p>Within normal range</p>
+            <p>Current sensor reading</p>
           </div>
-          <span className="normal-badge">Normal</span>
+
+          <span className="normal-badge">
+            Normal
+          </span>
         </div>
 
         <div className="summary-card">
           <span className="summary-icon">☀️</span>
+
           <div>
             <strong>Light</strong>
-            <p>Within normal range</p>
+            <p>Current sensor reading</p>
           </div>
-          <span className="normal-badge">Normal</span>
+
+          <span className="normal-badge">
+            Normal
+          </span>
         </div>
 
       </section>

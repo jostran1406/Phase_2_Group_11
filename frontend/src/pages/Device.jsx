@@ -1,14 +1,61 @@
 import { useState } from "react"
+import { controlDevice } from "../services/api"
 
 function Device() {
-  const [fan, setFan] = useState(false)
-  const [light, setLight] = useState(false)
-  const [buzzer, setBuzzer] = useState(false)
+  const [devices, setDevices] = useState({
+    fan: false,
+    light: false,
+    buzzer: false,
+  })
+
+  const [loadingDevice, setLoadingDevice] = useState(null)
+  const [error, setError] = useState(null)
+
+  const toggleDevice = async (device) => {
+    const newState = !devices[device]
+
+    try {
+      setLoadingDevice(device)
+      setError(null)
+
+      await controlDevice({
+        device,
+        status: newState,
+      })
+
+      setDevices((prev) => ({
+        ...prev,
+        [device]: newState,
+      }))
+    } catch (err) {
+      console.error("Failed to control device:", err)
+      setError(`Unable to control ${device}`)
+    } finally {
+      setLoadingDevice(null)
+    }
+  }
+
+  const deviceList = [
+    {
+      id: "fan",
+      name: "Fan",
+      icon: "🌀",
+    },
+    {
+      id: "light",
+      name: "Laboratory Light",
+      icon: "💡",
+    },
+    {
+      id: "buzzer",
+      name: "Buzzer",
+      icon: "🔊",
+    },
+  ]
 
   return (
     <div className="device-page">
 
-      {/* Header */}
       <div className="page-header">
         <div>
           <h1>Device Control</h1>
@@ -21,7 +68,12 @@ function Device() {
         </div>
       </div>
 
-      {/* Device panel */}
+      {error && (
+        <div className="error-message">
+          {error}
+        </div>
+      )}
+
       <div className="device-panel">
 
         <div className="panel-header">
@@ -31,91 +83,54 @@ function Device() {
 
         <div className="device-list">
 
-          {/* FAN */}
-          <div className="device-item">
+          {deviceList.map((device) => (
 
-            <div className="device-info">
+            <div
+              className="device-item"
+              key={device.id}
+            >
 
-              <div className="device-icon">
-                🌀
+              <div className="device-info">
+
+                <div className="device-icon">
+                  {device.icon}
+                </div>
+
+                <div>
+                  <strong>
+                    {device.name}
+                  </strong>
+
+                  <span
+                    className={
+                      devices[device.id]
+                        ? "device-on"
+                        : "device-off"
+                    }
+                  >
+                    {devices[device.id]
+                      ? "ON"
+                      : "OFF"}
+                  </span>
+                </div>
+
               </div>
 
-              <div>
-                <strong>Fan</strong>
-
-                <span className={fan ? "device-on" : "device-off"}>
-                  {fan ? "ON" : "OFF"}
-                </span>
-              </div>
+              <button
+                className={`toggle ${
+                  devices[device.id] ? "active" : ""
+                }`}
+                disabled={loadingDevice === device.id}
+                onClick={() =>
+                  toggleDevice(device.id)
+                }
+              >
+                <span></span>
+              </button>
 
             </div>
 
-            <button
-              className={`toggle ${fan ? "active" : ""}`}
-              onClick={() => setFan(!fan)}
-            >
-              <span></span>
-            </button>
-
-          </div>
-
-
-          {/* LIGHT */}
-          <div className="device-item">
-
-            <div className="device-info">
-
-              <div className="device-icon">
-                💡
-              </div>
-
-              <div>
-                <strong>Laboratory Light</strong>
-
-                <span className={light ? "device-on" : "device-off"}>
-                  {light ? "ON" : "OFF"}
-                </span>
-              </div>
-
-            </div>
-
-            <button
-              className={`toggle ${light ? "active" : ""}`}
-              onClick={() => setLight(!light)}
-            >
-              <span></span>
-            </button>
-
-          </div>
-
-
-          {/* BUZZER */}
-          <div className="device-item">
-
-            <div className="device-info">
-
-              <div className="device-icon">
-                🔊
-              </div>
-
-              <div>
-                <strong>Buzzer</strong>
-
-                <span className={buzzer ? "device-on" : "device-off"}>
-                  {buzzer ? "ON" : "OFF"}
-                </span>
-              </div>
-
-            </div>
-
-            <button
-              className={`toggle ${buzzer ? "active" : ""}`}
-              onClick={() => setBuzzer(!buzzer)}
-            >
-              <span></span>
-            </button>
-
-          </div>
+          ))}
 
         </div>
 

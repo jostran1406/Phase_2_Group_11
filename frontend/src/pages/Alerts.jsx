@@ -1,85 +1,65 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
+import { getAlerts } from "../services/api"
 
 function Alerts() {
+  const [alerts, setAlerts] = useState([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(null)
 
-  const [alerts, setAlerts] = useState([
-    {
-      id: 1,
-      type: "High Temperature",
-      sensor: "Temperature",
-      value: "32.5 °C",
-      time: "Today, 10:32",
-      severity: "Critical",
-      status: "New"
-    },
-    {
-      id: 2,
-      type: "High Humidity",
-      sensor: "Humidity",
-      value: "82 %",
-      time: "Today, 09:15",
-      severity: "Warning",
-      status: "Acknowledged"
-    },
-    {
-      id: 3,
-      type: "Low Light",
-      sensor: "Light",
-      value: "120 lux",
-      time: "Yesterday, 16:42",
-      severity: "Warning",
-      status: "Resolved"
-    },
-    {
-      id: 4,
-      type: "High Temperature",
-      sensor: "Temperature",
-      value: "31.8 °C",
-      time: "Yesterday, 14:20",
-      severity: "Critical",
-      status: "Resolved"
+  const loadAlerts = async () => {
+    try {
+      setLoading(true)
+      setError(null)
+
+      const data = await getAlerts()
+
+      setAlerts(data)
+    } catch (err) {
+      console.error("Failed to load alerts:", err)
+      setError("Unable to load alert history")
+    } finally {
+      setLoading(false)
     }
-  ])
+  }
 
   const acknowledgeAlert = (id) => {
-
-    setAlerts(
-      alerts.map((alert) =>
+    setAlerts((prev) =>
+      prev.map((alert) =>
         alert.id === id
           ? {
               ...alert,
-              status: "Acknowledged"
+              status: "Acknowledged",
             }
           : alert
       )
     )
   }
 
-  return (
+  useEffect(() => {
+    loadAlerts()
+  }, [])
 
+  const newAlerts = alerts.filter(
+    (alert) => alert.status === "New"
+  ).length
+
+  return (
     <div className="page">
 
       <div className="page-header">
 
         <div>
-
           <h1>Alert History</h1>
 
           <p>
             Monitor environmental alerts and events
           </p>
-
         </div>
 
         <div className="alert-summary">
 
           <strong>
-            {
-              alerts.filter(
-                (alert) =>
-                  alert.status === "New"
-              ).length
-            }
+            {newAlerts}
           </strong>
 
           <span>
@@ -90,17 +70,33 @@ function Alerts() {
 
       </div>
 
+      {error && (
+        <div className="error-message">
+          {error}
+        </div>
+      )}
+
       <div className="table-card">
 
         <div className="table-header">
 
           <div>
-            <strong>Alert Events</strong>
+            <strong>
+              Alert Events
+            </strong>
 
             <span>
               {alerts.length} events
             </span>
           </div>
+
+          <button
+            className="refresh-button"
+            onClick={loadAlerts}
+            disabled={loading}
+          >
+            ↻ {loading ? "Loading..." : "Refresh"}
+          </button>
 
         </div>
 
@@ -109,7 +105,6 @@ function Alerts() {
           <table>
 
             <thead>
-
               <tr>
                 <th>Alert</th>
                 <th>Sensor</th>
@@ -119,31 +114,30 @@ function Alerts() {
                 <th>Status</th>
                 <th>Action</th>
               </tr>
-
             </thead>
 
             <tbody>
 
-              {alerts.map((alert) => (
+              {alerts.map((alert, index) => (
 
-                <tr key={alert.id}>
+                <tr key={alert.id ?? index}>
 
                   <td>
                     <strong>
-                      {alert.type}
+                      {alert.type ?? "--"}
                     </strong>
                   </td>
 
                   <td>
-                    {alert.sensor}
+                    {alert.sensor ?? "--"}
                   </td>
 
                   <td>
-                    {alert.value}
+                    {alert.value ?? "--"}
                   </td>
 
                   <td>
-                    {alert.time}
+                    {alert.time ?? alert.timestamp ?? "--"}
                   </td>
 
                   <td>
@@ -155,7 +149,7 @@ function Alerts() {
                           : "severity warning"
                       }
                     >
-                      {alert.severity}
+                      {alert.severity ?? "--"}
                     </span>
 
                   </td>
@@ -171,7 +165,7 @@ function Alerts() {
                           : "status-badge active"
                       }
                     >
-                      {alert.status}
+                      {alert.status ?? "--"}
                     </span>
 
                   </td>
@@ -205,12 +199,17 @@ function Alerts() {
 
           </table>
 
+          {!loading && alerts.length === 0 && (
+            <div className="empty-state">
+              No alerts available.
+            </div>
+          )}
+
         </div>
 
       </div>
 
     </div>
-
   )
 }
 
