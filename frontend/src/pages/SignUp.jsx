@@ -5,68 +5,49 @@ import { register } from "../services/api"
 function SignUp() {
   const navigate = useNavigate()
 
-  const [form, setForm] = useState({
-    username: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
-  })
+  const [username, setUsername] = useState("")
+  const [password, setPassword] = useState("")
+  const [confirmPassword, setConfirmPassword] = useState("")
 
   const [error, setError] = useState("")
   const [success, setSuccess] = useState("")
   const [loading, setLoading] = useState(false)
 
-  const handleChange = (e) => {
-    setForm({
-      ...form,
-      [e.target.name]: e.target.value,
-    })
-  }
-
   const handleSubmit = async (e) => {
     e.preventDefault()
+    console.log("Submit form đã được kích hoạt!")
 
     setError("")
     setSuccess("")
 
-    // Validate phía giao diện
-    if (!form.username || !form.email || !form.password || !form.confirmPassword) {
+    if (!username || !password || !confirmPassword) {
       setError("Please fill in all fields.")
       return
     }
 
-    if (form.password !== form.confirmPassword) {
+    if (password !== confirmPassword) {
       setError("Passwords do not match.")
-      return
-    }
-
-    if (form.password.length < 6) {
-      setError("Password must contain at least 6 characters.")
       return
     }
 
     try {
       setLoading(true)
+      console.log("Đang bắt đầu gọi hàm register từ api.js...")
 
-      // Gọi API đăng ký xuống Backend
-      const data = await register(
-        form.username,
-        form.password
-      )
+      const data = await register(username, password)
+      console.log("Kết quả trả về từ API:", data)
 
-      // Kiểm tra HTTP Status 201 hoặc status success từ backend trả về
-      if (data.httpStatus === 201 || data.status === "success") {
-        setSuccess("Account created successfully!")
-        
-        // Tự động chuyển về trang đăng nhập sau 1.5 giây
+      if (data.status === "success" || data.httpStatus === 201) {
+        setSuccess("Account created successfully.")
         setTimeout(() => {
           navigate("/login")
-        }, 1500)
+        }, 1000)
       } else {
-        setError(data.message || "Registration failed. Username might already exist.")
+        setError(data.message || "Registration failed.")
       }
 
     } catch (error) {
+      console.error("Lỗi bắt được trong catch:", error)
       setError("Cannot connect to the server.")
     } finally {
       setLoading(false)
@@ -76,34 +57,20 @@ function SignUp() {
   return (
     <div className="auth-page">
       <div className="auth-card">
-
         <div className="auth-header">
           <div className="auth-logo">⚙</div>
           <h1>Create Account</h1>
-          <p>Create your Lab IoT monitoring account</p>
+          <p>Create your Lab IoT account</p>
         </div>
 
         <form onSubmit={handleSubmit}>
-
           <label>
             Username
             <input
               type="text"
-              name="username"
-              value={form.username}
-              onChange={handleChange}
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
               placeholder="Enter username"
-            />
-          </label>
-
-          <label>
-            Email
-            <input
-              type="email"
-              name="email"
-              value={form.email}
-              onChange={handleChange}
-              placeholder="Enter email"
             />
           </label>
 
@@ -111,9 +78,8 @@ function SignUp() {
             Password
             <input
               type="password"
-              name="password"
-              value={form.password}
-              onChange={handleChange}
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
               placeholder="Enter password"
             />
           </label>
@@ -122,9 +88,8 @@ function SignUp() {
             Confirm Password
             <input
               type="password"
-              name="confirmPassword"
-              value={form.confirmPassword}
-              onChange={handleChange}
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
               placeholder="Confirm password"
             />
           </label>
@@ -137,16 +102,13 @@ function SignUp() {
             className="auth-button"
             disabled={loading}
           >
-            {loading ? "Creating Account..." : "Sign Up"}
+            {loading ? "Creating..." : "Sign Up"}
           </button>
-
         </form>
 
         <p className="auth-footer">
-          Already have an account?{" "}
-          <Link to="/login">Login</Link>
+          Already have an account? <Link to="/login">Login</Link>
         </p>
-
       </div>
     </div>
   )
