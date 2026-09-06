@@ -184,28 +184,6 @@ Frontend-->>User: Display
 
 ---
 
-## 7.1 Dashboard Data Flow
-
-```mermaid
-flowchart LR
-
-Dashboard --> Dashboard_API
-
-Dashboard_API --> Backend
-
-Backend --> MySQL
-
-MySQL --> Backend
-
-Backend --> Dashboard_API
-
-Dashboard_API --> Dashboard
-```
-
-The dashboard retrieves summarized real-time information through a dedicated Dashboard API. The backend collects the latest sensor data, device status, and alert information from the database and returns a single aggregated response for dashboard visualization.
-
----
-
 ## 8. Component Relationship
 
 ```mermaid
@@ -243,7 +221,7 @@ Sensor -- GPIO/I2C --> STM32
 
 STM32 -- UART --> ESP8266
 
-ESP8266 -- HTTP --> Backend
+ESP8266 -- MQTT/HTTP --> Backend
 
 Backend -- SQL --> MySQL
 
@@ -255,63 +233,3 @@ STM32 -- GPIO --> Relay
 ```
 
 ---
-
-## 10. API Design
-
-### Authentication API
-
-| Method | Endpoint | Description |
-|----------|----------|----------|
-| POST | /api/login | User login |
-
-### Sensor API
-
-| Method | Endpoint | Description |
-|----------|----------|----------|
-| GET | /api/sensors/latest | Get latest sensor data |
-| GET | /api/sensors/history | Get sensor history |
-
-### Device API
-
-| Method | Endpoint | Description |
-|----------|----------|----------|
-| POST | /api/device/control | Control devices |
-
-### Alert API
-
-| Method | Endpoint | Description |
-|----------|----------|----------|
-| GET | /api/alerts | Get alert history |
-```
-
-## 11. JSON Data Format
-
-### Sensor Data Payload
-
-```json
-{
-  "node_id": 1,
-  "temperature": 28.5,
-  "humidity": 65.2,
-  "light": 420,
-  "timestamp": "2026-08-09T08:30:00Z"
-}
-```
-
-### Device Control Payload
-
-```json
-{
-  "device": "fan",
-  "status": true
-}
-```
-
-### Login Request
-
-```json
-{
-  "username": "admin",
-  "password": "123456"
-}
-```
