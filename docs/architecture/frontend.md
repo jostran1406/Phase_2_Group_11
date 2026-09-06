@@ -13,11 +13,13 @@ graph LR
 
 User --> Dashboard
 
-Dashboard --> Components
+Dashboard --> Dashboard_API
 
-Components --> API_Service
+Dashboard --> History_API
 
-API_Service --> Backend
+Dashboard_API --> Backend
+
+History_API --> Backend
 
 ```
 
@@ -148,4 +150,31 @@ F --> G
 
 G --> H
 
+```
+
+## 8. API Integration
+
+```mermaid
+graph LR
+
+Frontend --> REST_API
+
+REST_API --> Backend
+
+Backend --> MySQL
+```
+
+### Description
+
+The frontend communicates with the backend through REST APIs using HTTP/HTTPS protocols.
+
+Main API functions include:
+
+- User Authentication
+- Sensor Data Retrieval
+- Device Control
+- Alert History Retrieval
+- Threshold Configuration
+
+All API responses are returned in JSON format and displayed through dashboard components.
 ```
